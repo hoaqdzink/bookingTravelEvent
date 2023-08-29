@@ -1,0 +1,66 @@
+<div style="margin-bottom: 30px;">
+    <b style="font-size: 35px;">4.0</b><i class="fas fa-star" style="color: orange;"></i> 330 danh gia
+</div>
+<div id="vaoFeedback">
+    <div id="danhGiaBai"  th:each="c : ${listComment}" th:object="${c}">
+    <div class="commentquaidoiquai">
+        <div>
+            <div>
+                <img th:src="@{|/assets/images/account/*{orderTour.account.folder}/*{orderTour.account.image}|}" onerror="this.src='/assets/images/userImage.png'" alt="" class="imgcommentquai">
+                <p><b>[[*{orderTour.account.fullname}]]</b></p>
+                <div class="danhgiacomment">
+                    <label>[[*{numStars}]] <i class="fas fa-star" style="color: orange;"></i></label>
+                    <label style="margin-left: 10px; font-size: 13px;">[[*{#dates.format(createDate, 'E dd/MM/yyyy hh:mm:ss a')}]]</label>
+                </div>
+            </div>
+        </div>
+        <div class="commentvietquai" th:utext="*{comment}"></div>
+    </div>
+    <div class="commentquaidoiquaireply" th:if="*{reply != null}">
+        <div>
+            <img th:src="@{|/assets/images/account/*{orderTour.tourPost.account.folder}/*{orderTour.tourPost.account.image}|}" onerror="this.src='/assets/images/userImage.png'" alt="" class="imgcommentquai">
+            <p><b>[[*{orderTour.tourPost.account.fullname}]]</b></p>
+            <div class="danhgiacomment"><label style="margin-left: 10px; font-size: 13px;">[[*{#dates.format(createDate, 'E dd/MM/yyyy hh:mm:ss a')}]]</label></div>
+        </div>
+        <div class="commentvietquai">
+            [[*{reply}]]
+        </div>
+    </div>
+</div>
+</div>
+<button id="xemThemDanhGia">Đọc thêm các đánh giá <i class="fas fa-angle-down"></i></button>
+<style>
+    .commentvietquai {
+        margin: -20px 0 20px 50px;
+    }
+    
+    .danhgiacomment {
+        position: relative;
+        top: -20px;
+        left: 0;
+    }
+    
+    .commentquaidoiquaireply {
+        margin-top: 0;
+        width: 850px;
+        right: 0;
+        margin-left: 123px;
+        border-top: 2px solid #ff9315;
+        border-bottom: 2px solid #08ff46;
+        box-shadow: 0px 0px 5px #888888;
+    }
+    
+    .commentquaidoiquai {
+        margin-top: 10px;
+        box-shadow: 0px 0px 5px #888888;
+        border-bottom: 2px solid #ff9315;
+    }
+    
+    .imgcommentquai {
+        margin: 5px 5px 0 5px;
+        border-radius: 100%;
+        width: 45px;
+        height: 40px;
+        float: left;
+    }
+</style>

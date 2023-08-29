@@ -1,0 +1,36 @@
+<div class="form signinForm">
+    <form onsubmit="return validateLogin()" th:action="@{/security/login}" method="post" class="login">
+       
+        <h1 style="margin-top: 60px;">Đăng nhập</h1>
+        <p style="margin-left: 30px; color: greenyellow;" th:text="${message}"></p>
+        <p style="margin-left: 30px; color: red;" th:text="${error}"></p>
+        <input id="username" name="username" type="text" placeholder="Tên đăng nhập/ email">
+        <p  style="margin-left: 30px; color: red;" id="messageUser"></p>
+        <input id="password" name="password" type="password" placeholder="Mật khẩu">
+        <p  style="margin-left: 30px; color: red;" id="messagePass"></p>
+        <span id="hiden" class="fas fa-eye showpass"></span>
+        <a class="dkdk" th:href="@{/register}">Đăng ký tài khoản tại đây</a>
+        <div class="remember">
+            <input style="position: absolute; top: 7px; left: 10px;" name="remember" type="checkbox">
+            <p>Ghi nhớ</p>
+            
+            
+            
+        </div>
+        
+        
+        <button style="cursor: pointer;" type="submit" class="login-btn-1">Đăng nhập</button>
+    </form>
+
+</div>
+<style>
+    .remember{
+        position: relative;
+        left: 30px;
+        width: 100px;
+        top: 0px;
+    }
+</style>
+
+
+

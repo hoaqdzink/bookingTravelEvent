@@ -1,0 +1,88 @@
+<div class="form signinForm">
+    <form name="myFormCustomer" onsubmit="return validateRegisterCustomer()" id="regForm" th:action="@{/security/register_customer}" th:object="${account}" method="post" onkeydown="return event.key != 'Enter';">
+
+        <div class="prograss_bar">
+            <span class="step">1</span>
+            <span class="step">2</span>
+            <span class="step">3</span>
+        </div>
+        <h1>Đăng ký cá nhân</h1>
+
+        <!-- One "tab" for each step in the form: -->
+        <div class="tab">
+            <p style="color: green;" th:text="${messageCustomer}"></p>
+            <input id="namekh" name="username" th:value="*{username}" class="input" placeholder="Tên đăng nhập" onkeypress="return event.charCode != 32">
+            <div id="errorCustUser" class="text-danger" th:text="${error1Customer}"></div>
+            <div id="messnamekh" class="text-danger"></div>
+
+            <input id="passkh" name="password" th:value="*{password}" class="input" type="password" placeholder="Mật khẩu" onkeypress="return event.charCode != 32">
+            <div id="messpasskh" class="text-danger"></div>
+
+            <input id="conpasskh" name="confirmPassword" class="input" type="password" placeholder="Xác nhận mật khẩu" onkeypress="return event.charCode != 32">
+            <div id="messconpasskh" class="text-danger"></div>
+            <div style="text-align: center;">
+                <button type="button" id="nextBtn" onclick="nextPrev(1)">Tiếp tục</button>
+            </div>
+
+        </div>
+
+        <div class="tab">
+
+            <input name="fullname" th:value="*{fullname}" class="input" placeholder="Họ tên">
+            <div id="messfullnamekh" class="text-danger"></div>
+
+            <input name="phone" th:value="*{phone}" class="input" type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');" placeholder="Số điện thoại">
+            <div id="messphonekh" class="text-danger"></div>
+
+            <input name="email" th:value="*{email}" class="input" placeholder="Email" onkeypress="return event.charCode != 32">
+            <div id="messemailkh" class="text-danger"></div>
+            <div id="errorCustEmail" class="text-danger" th:text="${error2Customer}"></div>
+
+            <input name="address" th:value="*{address}" class="input" placeholder="Địa chỉ">
+            <div id="messaddresskh" class="text-danger"></div>
+            <div style="text-align: center;">
+                <button type="button" id="prevBtn" onclick="nextPrev(-1)">Trở lại</button>
+                <button type="button" id="nextBtn" onclick="nextPrev(1)">Tiếp tục</button>
+            </div>
+        </div>
+
+        <div class="tab">
+            Điều khoản về dịch vụ
+            <textarea disabled cols="30" rows="10">Chúng tôi không bán dữ liệu cá nhân của bạn cho các nhà quảng cáo và cũng không chia sẻ thông tin trực tiếp nhận dạng bạn (chẳng hạn như tên, địa chỉ email hoặc thông tin liên hệ khác) với những đơn vị này trừ khi được bạn cho phép cụ thể. Thay vào đó, các nhà quảng cáo có thể cho chúng tôi biết </textarea>
+            <label class="checkboxdk">
+                <input  class="check_input" checked id="checkbox" type="checkbox">
+                <div class="check_box"></div>
+                Tôi đã đọc và đồng ý về các điểu khoản.
+            </label>
+            <div style="text-align: center;">
+                <button type="button" id="prevBtn" onclick="nextPrev(-1)">Trở lại</button>
+                <button type="submit" id="submit" onclick="nextPrev(-2)">Xác nhận</button>
+            </div>
+        </div>
+        <!--  
+        <div style="overflow:auto;">
+            <div style="text-align: center;">
+
+                <button type="button" id="prevBtn" onclick="nextPrev(-1)">previous</button>
+                <button type="button" id="nextBtn" onclick="nextPrev(1)">next</button>
+            </div>
+        </div> -->
+
+    </form>
+
+</div>
+
+<script>
+    const btnsubmit = document.querySelector("#submit");
+    const check = document.getElementById("checkbox");;
+    check.onclick = function() {
+        if (this.checked) {
+
+            btnsubmit.classList.remove('active')
+            btnsubmit.disabled = false;
+        } else {
+            btnsubmit.classList.add('active')
+            btnsubmit.disabled = true;
+        }
+    }
+</script>

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="dynamic(main)">
+
+<head>
+    <title>Booking Travel & Event</title>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/assets/images/logoBookignTravel.png">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- link Fontawesome -->
+    <link rel="stylesheet" href="/assets/libs/fontawesome-free-5.15.4-web/css/all.min.css">
+
+    <!-- Link thư viện AngularJs -->
+    <script src="/assets/libs/angular-1.8.2/angular.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+    <!-- lick css -->
+    <link rel="stylesheet" href="/assets/css/introduce/introduce.css">
+    <link rel="stylesheet" href="/assets/css/index/footer.css">
+
+</head>
+
+<body ng-app="my-favorite-app" ng-controller="my-favorite-ctrl" style="background-color: #F1F2F2;">
+    <div class="Booking-Travel">
+        <header>
+            <!-- Ngôn ngữ, đăng nhập, thông tin liên hệ -->
+            <div th:replace="/index/menu1.html"></div>
+            <!-- Menu -->
+            <div th:replace="/index/menuChinh.html"></div>
+            <div th:replace="${main}"></div>
+            <div th:replace="/index/footer.html"></div>
+    </div>
+
+    
+
+    <script src="/assets/js/index/nation.js"></script>
+    <script src="/assets/js/index/menu.js"></script>
+
+    <!--ẨN HIỆN SLIDE CỦA VÙNG-->
+    <script src="/assets/js/index/anhien.js"></script>
+
+    <!--HÀM HIỆN MỖI KHI CLICK XEM THÊM-->
+    <script src="/assets/js/index/more-tour.js"></script>
+    <script src="/assets/js/detail.js"></script>
+    <!-- <script src="/assets/js/hienhinh.js"></script> -->
+    <script src="/assets/js/my-favorite.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+        </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+        </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+        </script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/admin/index :: dynamic(~{::main})}">
+
+<body>
+    <main>
+        <form name="formTypeEvent" onsubmit="return validateTypeEvent()" th:action="@{/admin/save_type_event}" method="post" th:object="${typeEvent}">
+            <input type="hidden" th:field="*{eventId}">
+            <label>Tên loại event</label>
+            <br>
+            <input name="name" th:value="*{name}" type="text">
+            <p class="errorMessage" id="errorNameEvent"></p>
+            <br>
+            <button type="submit">Lưu</button>
+        </form>
+        <script>
+            function validateTypeEvent(){
+                var status = false;
+                var index = 0;
+                var name = document.forms["formTypeEvent"]["name"].value;
+                var errorNameEvent = document.getElementById("errorNameEvent");
+                if(name == ""){
+                    text = `<i class="fas fa-exclamation-circle"></i>Vui lòng nhập vào tên loại sự kiện`;
+                    errorNameEvent.innerHTML = text;
+                }else{
+                    errorNameEvent.innerHTML = '';
+                    index++;
+                }
+
+                if(index == 1){
+                    status = true;
+                }else{
+                    status = false;
+                }
+                return status;
+            }
+        </script>
+    </main>
+</body>
+
+</html>

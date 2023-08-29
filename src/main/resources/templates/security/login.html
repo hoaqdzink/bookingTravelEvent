@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layoutSecurity :: dynamic(~{::main})}">
+
+
+<body>
+    <main>
+        <div th:replace="/security/_button.html"></div>
+        <div class="formBx">
+            <!--login nam day-->
+            <div th:replace="/security/_dangNhap.html"></div>
+
+            <!--quen mat khau nam day-->
+            <div th:replace="/security/_quenMatKhau.html"></div>
+        </div>
+    </main>
+</body>
+
+</html>

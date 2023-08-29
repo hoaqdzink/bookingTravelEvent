@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/admin/index :: dynamic(~{::main})}">
+
+<body>
+    <main>
+        <form name="formTypeTour" onsubmit="return validateTypeTour()" th:action="@{/admin/save_type}" method="post" th:object="${type}" enctype="multipart/form-data">
+            <input type="hidden" th:field="*{typeId}">
+            <label>Tên chính</label>
+            <br>
+            <input name="mainName" th:value="*{mainName}" type="text">
+            <p class="errorMessage" id="errorTypeTourMainName"></p>
+            <br>
+            <label>tên phụ</label>
+            <br>
+            <input name="extraName" th:value="*{extraName}" type="text" maxlength="40">
+            <br>
+            <p class="errorMessage" id="errorTypeTourExtraName"></p>
+            <label>Hình Ảnh:</label>
+            <label>
+                <img th:src="@{|/assets/images/type/*{typeId}/*{logo}|}"
+                    onerror="this.src='/assets/icon/Photos-new-icon.png'" class="avatarFile" alt="avarat" id="thumbnailSimple">
+                <input style="text-indent: -999em;" type="file" name="imageFile" id="imageFile" accept="image/png, image/jpeg, image/jpg">
+                <input id="imageHINH" type="hidden" th:field="*{logo}">
+            </label>
+            <p  class="errorMessage" id="errorTypeTourImage"></p>
+            <br>
+            <button type="submit">Lưu</button>
+        </form>
+        <script>
+            function validateTypeTour(){
+                var status = false;
+                var index = 0;
+
+                var mainName = document.forms["formTypeTour"]["mainName"].value;
+                var extraName = document.forms["formTypeTour"]["extraName"].value;
+                var hinhAnh = document.forms["formTypeTour"]["imageFile"].value;
+                var danHinh = document.getElementById("imageHINH").value;
+
+                var errorTypeTourMainName = document.getElementById("errorTypeTourMainName");
+                var errorTypeTourExtraName = document.getElementById("errorTypeTourExtraName");
+                var errorTypeTourImage = document.getElementById("errorTypeTourImage");
+
+                if(mainName == ""){
+                    text = `<i class="fas fa-exclamation-circle"></i>Vui lòng nhập vào tên chính`;
+                    errorTypeTourMainName.innerHTML = text;
+                }else{
+                    errorTypeTourMainName.innerHTML = '';
+                    index++;
+                }
+
+                if(extraName == ""){
+                    text = `<i class="fas fa-exclamation-circle"></i>Vui lòng nhập vào mô tả ngắn`;
+                    errorTypeTourExtraName.innerHTML = text;
+                }else{
+                    errorTypeTourExtraName.innerHTML = '';
+                    index++;
+                }
+
+                if(hinhAnh == "" && danHinh == ""){
+                    text = `<i class="fas fa-exclamation-circle"></i>Vui lòng chọn hình`;
+                    errorTypeTourImage.innerHTML = text;
+                }else{
+                    errorTypeTourImage.innerHTML = '';
+                    index++;
+                }
+
+                if(index == 3){
+                    status = true;
+                }else{
+                    status = false;
+                }
+                return status;
+            }
+        </script>
+    </main>
+</body>
+
+</html>

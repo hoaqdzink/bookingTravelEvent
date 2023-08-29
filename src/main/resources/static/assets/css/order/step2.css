@@ -1,0 +1,47 @@
+
+.vertical-tabs .nav-tabs1 .nav-link1{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border-radius: 100%;
+   font-size: 16px;
+   color:#fff;
+   height:30px;
+   width: 30px;
+   margin: 20px;
+}
+
+.vertical-tabs .nav-tabs1 .nav-link1.active{
+    opacity: 1;
+   color:#FFB422;;
+   background-color: #fff;
+}
+.vertical-tabs .tab-content>.active{
+   display:block;
+}
+.vertical-tabs .nav.nav-tabs1{
+    position: relative;
+   display: block;
+   float:left;
+   margin: -10px 20px;
+   background-color: orange;
+   height: 690px;
+   align-items: center;
+}
+.vertical-tabs .sv-tab-panel{
+   background:rgb(255, 255, 255);
+   height:599px;
+   padding-top:20px;
+}
+@media only screen and (max-width: 420px){
+ .titulo{font-size: 22px}
+}
+@media only screen and (max-width: 325px){
+ .vertical-tabs{ padding:20px;}
+}
+
+.vertical-tabs{
+   margin-top: 50px;
+   width: 400px;
+}
+

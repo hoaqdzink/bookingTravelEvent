@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/admin/index :: dynamic(~{::main})}">
+
+<body>
+    <main>
+        <div style=" background-color:orange; color: black; padding: 1px 10px; margin-top: 20px;">
+            <h2>Thông tin chi tiết</h2>
+        </div>
+        <form th:action="@{/admin/khoi_phuc_account}" method="post" th:object="${detailAccount}" enctype="multipart/form-data">
+            <div class="table" style=" margin: 30px;">
+                <button class="trangthai_detail2" type="submit">Khôi phục</button>
+                <div style="margin-top: 20px;">
+                    <div class="column_info">
+                        <div class="labelinfo">Tên</div>
+                        <div class="labelinfo" th:if="*{taxCode != null}">Mã số thuế</div>
+                        <div class="labelinfo">Thời gian xóa</div>
+                        <div class="labelinfo">Tên tài khoản</div>
+                        <div class="labelinfo" th:if="*{nameAdmin != null}">Tên người quản lý</div>
+                        <div class="labelinfo">Số điện thoại</div>
+                        <div class="labelinfo">Ngày sinh</div>
+                        <div class="labelinfo">Giới tính</div>
+                        <div class="labelinfo">Email</div>
+                        <div class="labelinfo">Địa chỉ</div>
+                        <div class="labelinfo">Quyền hạn</div>
+                        <div class="labelinfo">Ảnh đại diện</div>
+
+                    </div>
+                    <div class="column_info" style="width: 40%;">
+                        <div style="margin: 10px;">[[*{fullname}]]</div>
+                        <div style="margin: 10px;" th:if="*{taxCode != null}">[[*{taxCode}]]</div>
+                        <div style="margin: 10px;">[[*{#dates.format(createDate, 'E dd/MM/yyyy hh:mm:ss a')}]]</div>
+                        <div style="margin: 10px;">[[*{username}]]</div>
+                        <div style="margin: 10px;" th:if="*{nameAdmin != null}">[[*{nameAdmin}]]</div>
+                        <div style="margin: 10px;">[[*{phone}]]</div>
+                        <div style="margin: 10px;">[[*{#dates.format(birthDay, 'dd/MM/yyyy')}]]</div>
+                        <div style="margin: 10px;" th:if="*{gender == 'Nam'}">[[*{gender}?Nam]]</div>
+                        <div style="margin: 10px;" th:if="*{gender == 'Nu'}">[[*{gender}?Nữ]]</div>
+                        <div style="margin: 10px;" th:if="*{gender == 'Khac'}">[[*{gender}?Khác]]</div>
+                        <div style="margin: 10px;">[[*{email}]]</div>
+                        <div style="margin: 10px;">[[*{address}]]</div>
+
+                        <div style="margin: 10px;">
+                            <th:block th:each="r : ${listAllRoles}">
+                                <input onclick="return false;" type="checkbox" th:field="*{roles}"
+                                    th:value="${r.roleId}" th:text="${r.name}">
+                            </th:block>
+                        </div>
+                        <div style="margin: 10px;">
+                            <img style="cursor: default;" th:src="@{|/assets/images/account/*{folder}/*{image}|}"
+                                onerror="this.src='/assets/icon/Photos-new-icon.png'" class="avatarFile" alt="avarat"
+                                id="thumbnailSimple">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-----CÁC THUỘC TÍNH ẨN-->
+            <input type="hidden" th:field="*{username}">
+            <input type="hidden" th:field="*{address}">
+            <input type="hidden" name="birthDay" th:value="*{birthDay}">
+            <input type="hidden" th:field="*{email}">
+            <input type="hidden" th:field="*{fullname}">
+            <input hidden type="radio" th:field="*{gender}" th:value="Nam">
+            <input hidden type="radio" th:field="*{gender}" th:value="Nu">
+            <input hidden type="radio" th:field="*{gender}" th:value="Khac">
+            <label hidden>
+                <img th:src="@{|/assets/images/account/*{folder}/*{image}|}"
+                    onerror="this.src='/assets/icon/Photos-new-icon.png'" class="avatarFile" alt="avarat" id="thumbnailSimple">
+                <input style="text-indent: -999em;" type="file" name="imageFile" id="imageFile" accept="image/png, image/jpeg, image/jpg">
+                <input type="hidden" th:field="*{image}">
+            </label>
+            <input type="hidden" th:field="*{password}">
+            <input type="hidden" th:field="*{phone}">
+            <input type="hidden" th:field="*{taxCode}">
+            <input type="hidden" th:field="*{nameAdmin}">
+        </form>
+    </main>
+</body>
+
+</html>

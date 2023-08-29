@@ -1,0 +1,43 @@
+.laCo{
+    margin-top: 25px;
+}
+#co {
+    font-size: 20px;
+    width: 135px;
+    background-color: rgba(255, 255, 255, 0);
+    border: 1px solid rgba(238, 238, 238, 0);
+    color: black;
+    text-align: right;
+}
+
+#co1 {
+    background-color: rgba(255, 255, 255, 0);
+    border: 1px solid rgba(238, 238, 238, 0);
+    color: black;
+    text-align: left;
+}
+
+#text1 {
+    font-size: 20px;
+    color: #FF9500;
+    text-decoration: none;
+}
+#text1:hover {
+    color: #c77400;
+}
+#mxh {
+    font-size: 27px;
+    color: #FF9500;
+    margin-left: 20px;
+}
+
+#mxh:hover {
+    color: #f55911;
+}
+
+#text4 {
+    font-size: 20px;
+    color: orange;
+    text-decoration: none;
+    margin-left: 20px;
+}

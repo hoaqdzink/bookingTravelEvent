@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/enterprise/index :: dynamic(~{::main})}">
+
+<body>
+    <main>
+        <div style=" background-color:orange; color: black; padding: 1px 10px; margin-top: 20px;font-family: Tahoma, sans-serif;">
+            <h2>Quản lý phản hồi</h2>
+        </div>
+
+        <form th:object="${rateTour}">
+            <div class="thembai" style=" margin: 20px;">
+                <div class="col_line4">
+                    <div class="col_line6"><b class="labelinfo">Thông tin dịch vụ:</b></div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b id="infoPhu" class="labelinfo">Tên dịch vụ:
+                            [[*{orderTour.tourPost.name}]]</b></div>
+                    <div class="col_line5"></div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b id="infoPhu" class="labelinfo">ID: [[*{orderTour.tourPost.tourId}]]</b>
+                    </div>
+                    <div class="col_line5"></div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b id="infoPhu" class="labelinfo">Thời gian:
+                            [[*{orderTour.tourPost.time}]]</b></div>
+                    <div class="col_line5"></div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b id="infoPhu" class="labelinfo">Khởi hành:</b></div>
+                    <div class="col_line5"></div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b id="infoPhu" class="labelinfo">Điểm đến:</b></div>
+                    <div class="col_line5"></div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b id="infoPhu" class="labelinfo">Tổng tiền:</b></div>
+                    <div class="col_line5"></div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b class="labelinfo">Thông tin khách hàng:</b></div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b id="infoPhu" class="labelinfo">Tên:</b></div>
+                    <div class="col_line5"></div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b id="infoPhu" class="labelinfo">Địa chỉ:</b></div>
+                    <div class="col_line5"></div>
+
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b id="infoPhu" class="labelinfo">Điện thoại:</b></div>
+                    <div class="col_line5"></div>
+
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b id="infoPhu" class="labelinfo">Email:</b></div>
+                    <div class="col_line5"></div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b class="labelinfo">Ngày phản hồi:</b></div>
+                    <div class="col_line5"></div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b class="labelinfo">Trạng thái: [[*{status}?'Đã phản hồi':'Đang chờ phải hồi...']]</b></div>
+                    <div class="col_line5"></div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b class="labelinfo">Đánh giá: <span th:utext="*{comment}"></span></b></div>
+                    <div class="col_line5"></div>
+                </div>
+            </div>
+            <button>Phản hồi</button>
+        </form>
+    </main>
+</body>
+
+</html>
+<style>
+    #infoPhu {
+        font-weight: 100;
+        margin-left: 10px;
+        color: #6F6F6F;
+    }
+</style>

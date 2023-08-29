@@ -1,0 +1,90 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout :: dynamic(~{::main})}">
+
+<body>
+    <main th:object="${itemTour}">
+        <div class="card">
+            <div class="container-fluid">
+                <div style="margin-top: 20px;">
+                    <h1> <b th:utext="*{name}"></b> </h1>
+                    <div class="row">
+                        <div class="col-6">
+                            <div>Thời gian : <b th:utext="*{time}"></b></div>
+                            <div style="margin-top: 10px;">Nơi Khởi Hành: <b th:utext="*{fromCity.name}"></b></div>
+                            <div style="margin-top: 15px;">
+                                <i style="color: #FF9922; margin-right:10px ; " class="fas fa-users"></i>Phù hợp cho tất cả mọi người <br>
+                                <div style="background-color: greenyellow; width: 30%; border-radius: 25px;">
+                                    <span style="color: #FF9922;font-size: 20px;" class="far fa-star"></span>
+                                    <b style=" border-radius: 15px; margin-right: 10px;">4.5</b>| 330 đánh giá
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div>Phương Tiện: <b th:utext="*{tranport.name}"></b></div>
+                            <div style="margin-top: 10px;">Điểm đến: <b th:utext="*{toCity.name}"></b></div>
+                            <div style="margin-top: 10px;">Tổ chức bởi: <b>[[*{account.fullname}]]</b></div>                
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class=" col-md-8">
+                        <div th:replace="/tour/_img-detail.html">
+
+                        </div>
+                        <div th:replace="/tour/_tourLienQuan.html"></div>
+
+                    </div>
+                    <div class=" col-md-4 ">
+                        <div class="info">
+                            <div>
+                                <h3 class="product-title" th:utext="*{name}"></h3>
+                                <hr>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div> Mã tour: </div>
+                                    <div> Thời gian:</div>
+                                    <div> Phương tiện: </div>
+                                    <div> Người lớn: </div>
+                                    <div> Trẻ em: </div>
+                                    <div> Em bé: </div>
+                                    <div>Giảm giá: </div>
+                                </div>
+                                <div class="col-6 info_detail">
+                                    <b>[[*{tourId}]]</b><br>
+                                    <b>[[*{time}]]</b><br>
+                                    <b>[[*{tranport.name}]]</b><br>
+                                    <b>[[*{#numbers.formatDecimal(priceAdult, 0, 'POINT', 0, 'COMMA')}]] đ</b><br>
+                                    <b>[[*{#numbers.formatDecimal(priceChildren, 0, 'POINT', 0, 'COMMA')}]] đ</b><br>
+                                    <b>[[*{#numbers.formatDecimal(priceBaby, 0, 'POINT', 0, 'COMMA')}]] đ</b><br>
+                                    <b>[[*{discount}]]%</b>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="info">
+                            <div class="row">
+                                <div class="col-3">
+                                    <div>Giá tour</div>
+                                </div>
+                                <div class="col-9 info_detail">
+                                    <b style="color: #FF5722; font-size: 36px;">[[*{#numbers.formatDecimal(sumPriceTourDiscount, 0, 'POINT', 0, 'COMMA')}]] VND</b>
+                                </div>
+
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-7 hotline_info">Hotline: 0966456789</div>
+                                <div class="col-5">
+                                    <a th:href="@{|/order/tour/*{tourId}|}" type="button" class="order"><button class="order">Đặt</button>  </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<div class="container-fluid">
+    <div class="menu-inf row">
+        <!-- Ảnh đại diện -->
+        <div class="col-2 menu-row-inf">
+            <div class="row" th:object="${userAll}">
+                <div class="col-2.7">
+                    <img  th:src="@{|/assets/images/account/*{folder}/*{image}|}"
+                                    onerror="this.src='/assets/images/userImage.png'" class="avarta-inf" alt="avarta">
+                </div>
+                <div class="col-9.3">
+                    <a>Xin chào</a>
+                    <th:block th:if="${#request.isUserInRole('CUST') or #request.isUserInRole('STAF') or #request.isUserInRole('DIRE')}">
+                        <h5>[[*{fullname}]]</h5>
+                    </th:block>
+                    <th:block th:if="${#request.isUserInRole('ENTE')}">
+                        <h5>[[*{nameAdmin}]]</h5>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+        <!-- Thông tin cá nhân -->
+        <th:block th:if="${#request.isUserInRole('CUST') or #request.isUserInRole('STAF') or #request.isUserInRole('DIRE')}">
+            <div class="col-2.5 menu-row-inf">
+                <a  th:href="@{|/profile/profile_information/${#request.remoteUser}|}"> <i class="far fa-user" style="color: rgb(30, 4, 179);"></i> Thông tin cá nhân </a>
+            </div>
+        </th:block>
+        <!-- Thông tin doanh nghiệp -->
+        <th:block th:if="${#request.isUserInRole('ENTE')}">
+            <div class="col-2.5 menu-row-inf">
+                <a th:href="@{|/profile/profile_information_enterprise/${#request.remoteUser}|}"> <i class="far fa-user" style="color: rgb(30, 4, 179);"></i> Thông tin doanh nghiệp </a>
+            </div>
+        </th:block>
+        <!-- Trạng thái đơn đặt -->
+        <div class="col-2 menu-row-inf">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                    style="border: none; color: #8c898f;background-color: white; box-shadow: none;">
+                    <i class="fas fa-store-alt" style="color: rgb(1, 100, 67);"></i>Trạng thái đơn đặt
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="background-color: white;">
+                  <a class="dropdown-item" th:href="@{/profile/profile_order_tour_status}">Du lịch</a>
+                  <a class="dropdown-item" th:href="@{/profile/profile_order_event_status}">Sự kiện</a>
+                </div>
+        </div>
+        <!-- Lịch sử đơn đặt -->
+        <div class="col-1.9 menu-row-inf ">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                    style="border: none; color: #8c898f;background-color: white; box-shadow: none;">
+                    <i class="fas fa-history" style="color: rgb(2, 98, 122);"></i> Lịch sử đơn đặt
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="background-color: white;">
+                  <a class="dropdown-item" th:href="@{/profile/profile_order_tour_history}">Du lịch</a>
+                  <a class="dropdown-item" th:href="@{/profile/profile_order_event_history}">Sự kiện</a>
+                </div>
+              </div>
+        </div>
+        <!-- Đổi mật khẩu -->
+        <div class="col-1.8 menu-row-inf">
+            <a th:href="@{/profile/profile_change_password}"><i class="fas fa-lock" style="color: rgb(235, 37, 37);"></i> Đổi mật khẩu</a>
+        </div>
+        <!-- Liên hệ -->
+        <div class="col-1.8 menu-row-inf" th:if="${#request.isUserInRole('STAF') or #request.isUserInRole('CUST') or #request.isUserInRole('DIRE')}">
+            <a th:href="@{/profile/profile_contact}"><i class="fas fa-headphones" style="color: rgb(240, 49, 144);"></i> Liên hệ</a>
+        </div>
+        <div class="col-1.8 menu-row-inf" th:if="${#request.isUserInRole('ENTE')}">
+            <a th:href="@{/profile/profile_contact_enterprise}"><i class="fas fa-headphones" style="color: rgb(240, 49, 144);"></i> Liên hệ</a>
+        </div>
+    </div>
+</div>

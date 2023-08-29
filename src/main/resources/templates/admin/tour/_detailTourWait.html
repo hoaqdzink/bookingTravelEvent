@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/admin/index :: dynamic(~{::main})}">
+
+<body>
+    <main>
+        <div style=" background-color:orange; color: black; padding: 1px 10px; margin-top: 20px;font-family: Tahoma, sans-serif;">
+            <h2>Quản lý bài đăng</h2>
+        </div>
+
+        <form th:action="@{/admin/duyet_tour}" th:object="${tour}" method="post" enctype="multipart/form-data">
+            <div class="thembai" style=" margin: 20px;">
+                <button class="trangthai_detail1" name="nutAdminHuy">Hủy đơn</button>
+                <button class="trangthai_detail2" name="nutAdminDuyet">Duyệt đơn</button>
+                <div class="col_line4">
+                    <div class="col_line6"><b class="labelinfo">Tên dịch vụ:</b></div>
+                    <div class="col_line5">[[*{name}]]</div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b class="labelinfo">ID:</b></div>
+                    <div class="col_line5">[[*{tourId}]]</div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b class="labelinfo">Tên doanh nghiệp:</b></div>
+                    <div class="col_line5">[[*{account.fullname}]]</div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b class="labelinfo">Số điện thoại:</b></div>
+                    <div class="col_line5">[[*{account.phone}]]</div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b class="labelinfo">Ngày đăng:</b></div>
+                    <div class="col_line5">[[*{#dates.format(createDate, 'dd-MM-yyyy')}]]</div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b class="labelinfo">Thời gian:</b></div>
+                    <div class="col_line5">[[*{time}]]</div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b class="labelinfo">Khởi hành:</b></div>
+                    <div class="col_line5">[[*{fromCity.name}]]</div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b class="labelinfo">Điểm đến:</b></div>
+                    <div class="col_line5">[[*{toCity.name}]]</div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b class="labelinfo">Loại vé:</b></div>
+                    <div class="col_line5">-------------------------------------------------------------------------</div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b style="font-weight: 100; margin-left:10px" class="labelinfo">Người lớn:</b></div>
+                    <div class="col_line5">[[*{#numbers.formatDecimal(priceAdult, 0, 'POINT', 1, 'COMMA')}]]</div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b style="font-weight: 100; margin-left:10px" class="labelinfo">Trẻ em:</b></div>
+                    <div class="col_line5">[[*{#numbers.formatDecimal(priceChildren, 0, 'POINT', 1, 'COMMA')}]]</div>
+
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"> <b style="font-weight: 100; margin-left:10px" class="labelinfo">Em bé:</b></div>
+                    <div class="col_line5">[[*{#numbers.formatDecimal(priceBaby, 0, 'POINT', 1, 'COMMA')}]]</div>
+
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b class="labelinfo">Giá tiền:</b></div>
+                    <div class="col_line5">[[*{#numbers.formatDecimal(priceTour, 0, 'POINT', 1, 'COMMA')}]]</div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b class="labelinfo">Bài tiêu biểu:</b></div>
+                    <div class="col_line5">[[*{topPost?'Có':'Không'}]]</div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b class="labelinfo">Mô tả:</b></div>
+                    <div class="col_line5">
+                        <div class="description" th:utext="*{descriptionTour}"></div>
+                    </div>
+
+
+                </div>
+                <div class="col_line4">
+
+                    <div class="extraImage">
+                        <b class="labelinfo">Hình ảnh:</b><br>
+                        <label>
+                            <img class="extraImage2" id="thumbnailMainImage"
+                                th:src="@{|/assets/images/tour/*{folder}/*{primaryImage}|}"
+                                onerror="this.src='/assets/icon/Photos-new-icon.png'">
+                        </label>
+                        <label>
+                            <img class="extraImage2" id="thumbnailExtraImage0"
+                                th:src="@{|/assets/images/tour/*{folder}/*{extraImage1}|}"
+                                onerror="this.src='/assets/icon/Photos-new-icon.png'" alt="hình ảnh tour" />
+                        </label>
+                        <label>
+                            <img class="extraImage2" id="thumbnailExtraImage1"
+                                th:src="@{|/assets/images/tour/*{folder}/*{extraImage2}|}"
+                                onerror="this.src='/assets/icon/Photos-new-icon.png'" alt="hình ảnh tour" />
+                        </label>
+                        <label>
+                            <img class="extraImage2" id="thumbnailExtraImage2"
+                                th:src="@{|/assets/images/tour/*{folder}/*{extraImage3}|}"
+                                onerror="this.src='/assets/icon/Photos-new-icon.png'" alt="hình ảnh tour" />
+                        </label>
+                        <label>
+                            <img class="extraImage2" id="thumbnailExtraImage3"
+                                th:src="@{|/assets/images/tour/*{folder}/*{extraImage4}|}"
+                                onerror="this.src='/assets/icon/Photos-new-icon.png'" alt="hình ảnh tour" />
+                        </label>
+                        <label>
+                            <img class="extraImage2" id="thumbnailExtraImage4"
+                                th:src="@{|/assets/images/tour/*{folder}/*{extraImage5}|}"
+                                onerror="this.src='/assets/icon/Photos-new-icon.png'" alt="hình ảnh tour" />
+                        </label>
+                        <label>
+                            <img class="extraImage2" id="thumbnailExtraImage5"
+                                th:src="@{|/assets/images/tour/*{folder}/*{extraImage6}|}"
+                                onerror="this.src='/assets/icon/Photos-new-icon.png'" alt="hình ảnh tour" />
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+            <!----------------------PHẦN ẨN THUỘC TÍNH SẼ Ở ĐÂY----------------->
+            <input type="hidden" th:field="*{tourId}">
+            <input type="hidden" name="emails" th:value="*{account.email}">
+            <input type="hidden" th:field="*{account.username}">
+            <input type="hidden" th:field="*{name}" />
+            <input type="hidden" th:field="*{time}" />
+            <input type="hidden" th:field="*{priceTour}" />
+            <input type="hidden" th:field="*{priceAdult}" />
+            <input type="hidden" th:field="*{priceChildren}" />
+            <input type="hidden" th:field="*{priceBaby}" />
+            <input type="hidden" th:field="*{discount}">
+            <input type="hidden" name="createDate" th:value="*{createDate}">
+            <select hidden th:field="*{toCity.toCityId}">
+                    <option th:each="to: ${toCityList}" th:value="${to.toCityId}" th:text="${to.name}"></option>
+                </select>
+            <select hidden th:field="*{fromCity.fromCityId}">
+                    <option th:each="from : ${fromCityList}" th:value="${from.fromCityId}" th:text="${from.name}"></option>
+                </select>
+            <select hidden th:field="*{type.typeId}">
+                    <option th:each="type : ${typeList}" th:value="${type.typeId}" th:text="${type.mainName}"></option>
+                </select>
+            <select hidden th:field="*{tranport.tranportId}">
+                    <option th:each="tranport : ${tranportList}" th:value="${tranport.tranportId}" th:text="${tranport.name}"></option>
+                </select>
+            <label hidden>
+                    <input class="hide" type="file" name="mainImage"  id="mainImage" accept="image/png, image/jpeg" />
+                    <input type="hidden" th:field="*{primaryImage}"/>
+                    <img id="thumbnail" th:src="@{|/assets/images/tour/*{folder}/*{primaryImage}|}" alt="hình ảnh tour" />
+                </label>
+            <label hidden>
+                    <input class="hide" type="file" name="extraImage" accept="image/png, image/jpeg" />
+                    <input type="hidden" th:field="*{extraImage1}"/>
+                    <img id="thumbnail0" th:src="@{|/assets/images/tour/*{folder}/*{extraImage1}|}" alt="hình ảnh tour" />
+                </label>
+            <label hidden>
+                    <input class="hide" type="file" name="extraImage" accept="image/png, image/jpeg" />
+                    <input type="hidden" th:field="*{extraImage2}"/>
+                    <img id="thumbnail1" th:src="@{|/assets/images/tour/*{folder}/*{extraImage2}|}" alt="hình ảnh tour" />
+                </label>
+            <label hidden>
+                    <input class="hide" type="file" name="extraImage" accept="image/png, image/jpeg" />
+                    <input type="hidden" th:field="*{extraImage3}"/>
+                    <img id="thumbnail2" th:src="@{|/assets/images/tour/*{folder}/*{extraImage3}|}" alt="hình ảnh tour" />
+                </label>
+            <label hidden>
+                    <input class="hide" type="file" name="extraImage" accept="image/png, image/jpeg" />
+                    <input type="hidden" th:field="*{extraImage4}"/>
+                    <img id="thumbnail3" th:src="@{|/assets/images/tour/*{folder}/*{extraImage4}|}" alt="hình ảnh tour" />
+                </label>
+            <label hidden>
+                    <input class="hide" type="file" name="extraImage" accept="image/png, image/jpeg" />
+                    <input type="hidden" th:field="*{extraImage5}"/>
+                    <img id="thumbnail4" th:src="@{|/assets/images/tour/*{folder}/*{extraImage5}|}" alt="hình ảnh tour" />
+                </label>
+            <label hidden>
+                    <input class="hide" type="file" name="extraImage" accept="image/png, image/jpeg" />
+                    <input type="hidden" th:field="*{extraImage6}"/>
+                    <img id="thumbnail5" th:src="@{|/assets/images/tour/*{folder}/*{extraImage6}|}" alt="hình ảnh tour" />
+                </label>
+            <textarea hidden th:field="*{descriptionTour}"></textarea>
+            <label hidden>
+                    <input type="radio" id="true" name="topPost" th:field="*{topPost}" th:value="true">Có
+                    <input type="radio" id="false" name="topPost" th:field="*{topPost}" th:value="false">Không
+                </label>
+
+        </form>
+    </main>
+</body>
+
+</html>

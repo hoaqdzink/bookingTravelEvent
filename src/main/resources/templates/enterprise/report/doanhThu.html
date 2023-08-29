@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/enterprise/index :: dynamic(~{::main})}">
+
+<body>
+    <main>
+        <div ng-app="report-app" ng-controller="report-ctrl">
+            <script>
+                google.charts.load('current', {
+                    'packages': ['corechart']
+                });
+
+                google.charts.setOnLoadCallback(chartReady);
+
+                var ready = false;
+
+                function chartReady() {
+                    ready = true;
+                }
+
+                function drawChartDoanhThu(items) {
+                    var doanhThu = [
+                        ['Tháng', 'doanh thu Tour (VND)', 'doanh thu Event (VND)'],
+                    ]
+                    doanhThu.push(...items);
+
+                    var data = google.visualization.arrayToDataTable(doanhThu);
+                    var options = {
+                        title: 'Doanh thu các dịch vụ theo tháng',
+                        curveType: 'function',
+                        legend: {
+                            position: 'bottom'
+                        }
+                    };
+                    var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+                    chart.draw(data, options);
+                }
+            </script>
+            <select id="year" ng-click="layYear()"> 
+                <option  value=""></option>
+                <option  value=""></option>
+                <option  value=""></option>
+                <option selected="selected" value=""></option>
+                <option  value=""></option>
+                <option  value=""></option>
+                <option  value=""></option>
+            </select>
+
+        </div>
+        <div id="curve_chart" style="width: 1400px; height: 600px"></div>
+
+
+        <script src="/assets/js/report/report-doanh-thu.js"></script>
+    </main>
+</body>
+
+</html>
+
+<script>
+    var x = document.getElementById("year").options;
+    var year = new Date().getFullYear();
+
+    for (let i = 0; i < x.length; i++) {
+        x[i].innerHTML = year - (i - 3);
+        x[i].value = year - (i - 3);
+    }
+</script>

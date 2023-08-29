@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/admin/index :: dynamic(~{::main})}">
+
+<body>
+    <main>
+        <form onsubmit="return validateToCity()" th:action="@{/admin/save_to_city}" method="post" th:object="${toCity}">
+            <input type="hidden" name="toCityId" th:value="*{toCityId}">
+            <label>Vùng</label>
+            <br>
+            <select id="region" th:field="*{region.regionId}">
+                <option value="0">------Chọn vùng------</option>
+                <option th:each="r: ${regionList}" th:value="${r.regionId}" th:text="${r.name}"></option>
+            </select>
+            <p class="errorMessage" id="errorRegion"></p>
+            <br>
+            <label>Điểm đến</label>
+            <br>
+            <input id="toCity" th:field="*{name}" type="text">
+            <p class="errorMessage" id="errorToCity"></p>
+            <br>
+            <button type="submit">Lưu</button>
+        </form>
+        <script>
+            function validateToCity(){
+                var status = false;
+                var index = 0;
+                var region = document.getElementById("region");
+                var toCity = document.getElementById("toCity");
+
+                var errorRegion = document.getElementById("errorRegion");
+                var errorToCity  = document.getElementById("errorToCity");
+
+                if(region.value == "0"){
+                    text = `<i class="fas fa-exclamation-circle"></i>Vui lòng chọn vùng`;
+                    errorRegion.innerHTML = text;
+                    region.focus();
+                }else{
+                    errorRegion.innerHTML = '';
+                    index++;
+                }
+
+                if(toCity.value == ""){
+                    text = `<i class="fas fa-exclamation-circle"></i>Vui lòng nhập vào điểm đến`;
+                    errorToCity.innerHTML = text;
+                    toCity.focus();
+                }else{
+                    errorToCity.innerHTML = '';
+                    index++;
+                }
+
+                if(index == 2){
+                    status = true;
+                }else{
+                    status = false;
+                }
+                return status;
+            }
+        </script>
+    </main>
+</body>
+
+</html>

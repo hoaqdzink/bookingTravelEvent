@@ -1,0 +1,168 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout :: dynamic(~{::main})}">
+
+<body>
+	<main>
+		<div class="container-fluid" style="margin-bottom: 100px;" ng-app="order-event-app" ng-controller="order-event-ctrl">
+			<form id="regForm">
+				<div th:replace="/order-event/_benTrenEvent.html"></div>
+				<div class="row">
+
+					<div class="col-7">
+						<div style="height: 540px; width: 800px; margin-top: 50px;">
+							<div class="tab">
+								<h2 id="textTieuDe">Chọn dịch vụ</h2>
+								<form>
+									<div class="row" style="margin-top: 40px;">
+										<div class="form-group col-4">
+											<label for="exampleDate">Chọn ngày đi</label>
+											<input type="date" class="form-control" ng-model="order.startDate" id="exampleDate"
+												style="width: 197px; height: 45px; background-color: #FF5722; color: white;">
+										</div>
+
+										<div class="form-group col-8">
+											<label>Người lớn<span style="color: red;">*</span> (18 tuổi trở lên)</label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"
+														style="background-color: white;" id="priceAdult" name="{{event.priceAdult}}">{{event.priceAdult | number}}đ</span>
+												</div>
+												<input min="0" ng-model="order.quantityAdult" class="form-control"
+													style="height: 45px;" type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');">
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="form-group col-6">
+											<label>Trẻ em (6 - 17 tuổi)</label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"
+														style="background-color: white;">{{event.priceChildren | number}}đ</span>
+												</div>
+												<input min="0" ng-model="order.quantityChildren" type="text" class="form-control"
+													style="height: 45px;" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');">
+											</div>
+										</div>
+										<div class="form-group col-6">
+											<label>Em bé (dưới 6 tuổi)</label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"
+														style="background-color: white;">{{event.priceBaby | number}}đ</span>
+												</div>
+												<input min="0" ng-model="order.quantityBaby" type="text" class="form-control"
+													style="height: 45px;" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');">
+											</div>
+										</div>
+									</div>
+								</form>
+
+
+							</div>
+							<div class="tab">
+								<h2 id="textTieuDe">Ghi chú của khách hàng</h2>
+								<div class="form-group">
+									<label for="exampleDate">Xin vui lòng cho chúng tôi biết về những lưu ý của
+										bạn</label>
+									<textarea id="w3review" name="w3review" ng-model="order.note" rows="15" cols="80"></textarea>
+								</div>
+							</div>
+							<div class="tab">
+								<h2 id="textTieuDe">Phương thức thanh toán</h2>
+								<div class="container-fluid" id="tab3">
+									<div style="margin-top: 43px;">
+
+										<p id="textTT"> <i class="fas fa-lock"></i> Mọi thông tin tài khoản sẽ được
+											chúng tôi bảo vệ tuyệt đối
+										</p>
+
+										<div>
+											<div>
+												<div class="row">
+													<div class="col-6">
+														<input type="radio" id="Momo" name="pay" value="Momo" ng-model="order.payment"
+															style="width: 20px; height: 20px; margin-top: 10px;">
+														<label for="Momo" style="font-size: 18px; margin-left:10px">Ví
+															điện tử MoMo</label>
+													</div>
+													<div class="col-6">
+														<img src="/assets/images/pay/z2881176324070_4027dc73d74940cd241b27007228cff7.jpg"
+															alt="Momo"
+															style="width: 50px; height: 50px; margin-left: auto; display: block;">
+													</div>
+
+												</div>
+											</div>
+											<div class="hr"></div>
+
+											<div class="row mt-4">
+												<div class="col-5">
+													<input type="radio" id="ATM" name="pay" value="ATM" ng-model="order.payment" style="width: 20px; height: 20px; margin-top: 10px;">
+													  <label for="ATM" style="font-size: 18px; margin-left:10px">Thẻ ATM nội địa</label>
+												</div>
+												<div class="col-7">
+													<img src="/assets/images/pay/z2881178088834_6fc8c4f6b7bd15b20c30834c1049f48e.jpg"
+														style="width: 70px; height: 50px; margin-left: 150px;">
+													<img src="/assets/images/pay/z2881178632026_2700e0abe98a14d7a56c017d7562feb9.jpg"
+														style="width: 90px; height: 50px;">
+													<img src="/assets/images/pay/z2881177557396_988fbbcb5eedb222f0f5349e8aa45850.jpg"
+														style="width: 90px; height: 50px;">
+												</div>
+											</div>
+											<div class="hr"></div>
+											<div class="row mt-4">
+												<div class="col-5">
+													<input type="radio" id="visa" name="pay" value="Visa" ng-model="order.payment" style="width: 20px; height: 20px; margin-top: 10px;">
+													  <label for="visa" style="font-size: 18px; margin-left:10px">Thẻ Visa/credit </label>
+												</div>
+												<div class="col-7">
+													<img src="/assets/images/pay/z2881179423199_f833b427efc4f09aa4351c7c89475d1e.jpg"
+														style="width: 70px; height: 50px; margin-left: 210px;">
+													<img src="/assets/images/pay/z2881179728571_6c3b449ecc21fc2f22c68c434aefb934.jpg"
+														style="width: 50px; height: 50px; margin-top: 10px;">
+													<img src="/assets/images/pay/z2881180051571_b35330faf76e12f7e248107185240636.jpg"
+														style="width: 70px; height: 70px; margin-top: 10px;">
+												</div>
+											</div>
+
+											<div class="hr"></div>
+											<div class="row mt-4">
+												<div class="col-5">
+													<input type="radio" id="Zalo" name="pay" value="Zalo" ng-model="order.payment" style="width: 20px; height: 20px; margin-top: 10px;">
+													  <label for="Zalo" style="font-size: 18px; margin-left:10px">Ví điện tử Zalo Pay </label>
+												</div>
+												<div class="col-7">
+													<img src="/assets/images/pay/z2881738610129_171a7dc352822edc5d8c7b8e698b0105.jpg"
+														style="width: 50px; height: 50px; margin-left: auto; display: block;">
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div>
+									<input onclick="uncheck()" id="uncheckthanhtoan" type="checkbox" style="margin-left: 350px; margin-top: 10px;">
+									<label style="color: #f75a2b;"> Tôi đã đọc và đồng ý về các điều khoản</label>
+								</div>
+
+							</div>
+						</div>
+						<div style="overflow:auto;">
+							<div style="text-align: center;">
+								<button type="button" class="btn btn-warning" id="prevBtn" onclick="nextPrev(-1)">Trở Về</button>
+								<button type="button" class="btn btn-warning" id="nextBtn" onclick="nextPrev(1)" >Tiếp Tục</button>
+								<button style="display: none;" id="thanhtoan" type="button" class="btn btn-warning" ng-click="order.create()">Thanh toán</button>
+							</div>
+						</div>
+					</div>
+					<div th:replace="/order-event/_benPhaiEvent.html"></div>
+				</div>
+			</form>
+		</div>
+		<script src="/assets/js/order/orderEvent.js"></script>
+	</main>
+</body>
+
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/enterprise/index :: dynamic(~{::main})}">
+
+<body>
+    <main>
+        <div>
+            <div style="height: 80px;">
+                <form th:action=@{/enterprise/search_feedback_tour}>
+                    <input name="keyword" class="timkiemadmin" type="text" placeholder="Tìm kiếm">
+                    <button class="timkiemadminbtn" type="submit"><i class="fas fa-search"></i></button>
+                </form>
+
+            </div>
+
+            <div style=" background-color:orange; color: black; padding: 1px 10px; margin-top: 20px; font-family: Tahoma, sans-serif;">
+                <h2>Quản lý phản hồi </h2>
+            </div>
+
+
+            <div class="table" style=" margin: 0 30px;">
+                <div>
+                    <h2 style="color: gray;font-family: Tahoma, sans-serif;">Danh sách phản hồi khách hàng</h2>
+                    <hr>
+                </div>
+
+                <div class="mytabs">
+                    <input type="radio" id="tabfree" name="mytabs" checked="checked">
+                    <label for="tabfree">F.B Tour</label>
+                    <div class="tab">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Thông tin dịch vụ</th>
+                                    <th>Thông tin khách hàng</th>
+                                    <th>Số sao</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Trạng thái</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="slideShow1">
+                                <tr th:each="list,state : ${listTourComment}" th:object="${list}">
+                                    <td style="width: 3%;">[[${state.count}]]</td>
+                                    <td style="width: 27%;">
+                                        <b>[[*{orderTour.tourPost.name}]]</b>
+                                        <p>ID Tour: [[*{orderTour.tourPost.tourId}]]</p>
+                                        <p>ID Đơn đặt: [[*{orderTour.orderTourId}]]</p>
+                                        <p>Thời gian: [[*{orderTour.tourPost.time}]]</p>
+                                        <p>Giá: [[*{#numbers.formatDecimal(orderTour.tourPost.priceTour,0,'POINT', 0,'COMMA')}]] vnd</p>
+                                        <p>Điểm đến: [[*{orderTour.tourPost.fromCity.name}]]</p>
+                                    </td>
+                                    <td style="width: 25%;">
+                                        <p>Tên: [[*{orderTour.account.fullname}]]</p>
+                                        <p>Địa chỉ: [[*{orderTour.account.address}]]</p>
+                                        <p>Điện thoại: [[*{orderTour.account.phone}]]</p>
+                                        <p>Email: [[*{orderTour.account.email}]]</p>
+                                    </td>
+                                    <td style="width: 7%;">[[*{numStars}]] <i style="color: rgb(255, 177, 31);" class="fas fa-star"></i></td>
+                                    <td style="width: 13%;">[[*{#dates.format(createDate, 'dd-MM-yyyy hh:mm:ss a')}]]
+                                    </td>
+                                    <td style="width: 15%;">
+                                        <p id="trangThaiComment" style="width: 90%; text-align: center;">[[*{status}]]</p>
+                                    </td>
+                                    <td style="width: 10%; text-align: center;">
+                                        <a class="dismissline" th:href="@{|/enterprise/detail_feedback_tour/*{ratingTourId}|}">
+                                            <button class="huybuttonedit fas fa-info"></button>
+                                        </a>
+                                        <a class="dismissline" th:if="*{status == false}" th:data-folder="*{orderTour.account.folder}" th:data-image="*{orderTour.account.image}" th:data-nameUser="*{orderTour.account.fullname}" th:data-comment="*{comment}" th:data-idrate="*{ratingTourId}" th:data-stars="*{numStars}"
+                                            th:data-orderTourId="*{orderTour.orderTourId}" th:data-email="*{orderTour.account.email}" th:data-emailEnterprise="*{orderTour.tourPost.account.email}" onclick="hienModalFeedbackTour(this.getAttribute('data-folder'), this.getAttribute('data-image'),
+                                            								this.getAttribute('data-nameUser'),
+                                            								this.getAttribute('data-comment'), this.getAttribute('data-idrate'),
+                                                                            this.getAttribute('data-stars'), this.getAttribute('data-orderTourId'),
+                                                                            this.getAttribute('data-email'), this.getAttribute('data-emailEnterprise'))">
+                                            <button style="background-color: rgb(41 168 251);" class="huybuttondelete fas fa-comment-dots"></button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="pagination">
+                            <ul></ul>
+                        </div>
+                    </div>
+
+                    <input type="radio" id="tabsilver" name="mytabs">
+                    <label for="tabsilver">F.B Event</label>
+                    <div class="tab">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Thông tin dịch vụ</th>
+                                    <th>Thông tin khách hàng</th>
+                                    <th>Số sao</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Trạng thái</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="slideShow2">
+                                <tr th:each="list,state : ${listEventComment}" th:object="${list}">
+                                    <td style="width: 3%;">[[${state.count}]]</td>
+                                    <td style="width: 27%;">
+                                        <b>[[*{orderEvent.eventPost.name}]]</b>
+                                        <p>ID Event: [[*{orderEvent.eventPost.eventPostId}]]</p>
+                                        <p>ID Đơn đặt: [[*{orderEvent.orderEventId}]]</p>
+                                        <p>Thời gian: [[*{orderEvent.eventPost.time}]]</p>
+                                        <p>Giá: [[*{#numbers.formatDecimal(orderEvent.eventPost.priceEvent,0,'POINT', 0,'COMMA')}]] vnd</p>
+                                        <p>Điểm đến: [[*{orderEvent.eventPost.fromCity.name}]]</p>
+                                    </td>
+                                    <td style="width: 25%;">
+                                        <p>Tên: [[*{orderEvent.account.fullname}]]</p>
+                                        <p>Địa chỉ: [[*{orderEvent.account.address}]]</p>
+                                        <p>Điện thoại: [[*{orderEvent.account.phone}]]</p>
+                                        <p>Email: [[*{orderEvent.account.email}]]</p>
+                                    </td>
+                                    <td style="width: 7%;">[[*{numStars}]] <i style="color: rgb(255, 177, 31);" class="fas fa-star"></i></td>
+                                    <td style="width: 13%;">[[*{#dates.format(createDate, 'dd-MM-yyyy hh:mm:ss a')}]]
+                                    </td>
+                                    <td style="width: 15%;">
+                                        <p id="trangThaiComment" style="width: 90%; text-align: center;">[[*{status}]]</p>
+                                    </td>
+                                    <td style="width: 10%; text-align: center;">
+                                        <a class="dismissline" th:href="@{|/enterprise/detail_feedback_event/*{ratingEventId}|}">
+                                            <button class="huybuttonedit fas fa-info"></button>
+                                        </a>
+                                        <a class="dismissline" th:if="*{status == false}" th:data-nameUserEvent="*{orderEvent.account.fullname}" th:data-folder="*{orderEvent.account.folder}" th:data-image="*{orderEvent.account.image}" th:data-comment="*{comment}" th:data-idrate="*{ratingEventId}"
+                                            th:data-stars="*{numStars}" th:data-orderEventId="*{orderEvent.orderEventId}" th:data-email="*{orderEvent.account.email}" th:data-emailEnterprise="*{orderEvent.eventPost.account.email}" onclick="hienModalFeedbackEvent(this.getAttribute('data-folder'), this.getAttribute('data-image'),this.getAttribute('data-nameUserEvent'), this.getAttribute('data-comment'), this.getAttribute('data-idrate'),
+                                                                        this.getAttribute('data-stars'), this.getAttribute('data-orderEventId'),
+                                                                        
+                                                                        this.getAttribute('data-email'), this.getAttribute('data-emailEnterprise'))">
+                                            <button style="background-color: rgb(41 168 251);" class="huybuttondelete fas fa-comment-dots"></button>
+                                        </a>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="pagination2">
+                            <ul></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!---HỘP THOẠI REPLY TOUR-->
+        <div id="modalFeedBack" class="modal">
+
+            <!-- Modal content -->
+            <form th:action="@{/enterprise/feebdback_tour}" method="post">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="close">&times;</span>
+                        <p>PHẢN HỒI TOUR</p>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col_line1" style="border-right: 1px solid orange;">
+                            <div>
+                                <img class="imgcommentquai" id="hinhAnhAccount" onerror="this.src='/assets/images/userImage.png'">
+                                <p style="padding-top: 20px;" id="tenUser"></p>
+                            </div><br><br>
+                            <hr>
+                            <div style="padding-top: 10px;">
+                                <p>Đánh giá của khách hàng: </p>
+                                <p style="word-wrap: break-word;" id="commentUser"></p>
+                            </div>
+                        </div>
+                        <div class="col_line1">
+                            <textarea style="width: 100%;outline: none;resize: none;" name="replyUser"></textarea>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <a id="xacNhan4">
+                            <button class="modal-button">Gửi</button>
+                        </a>
+                    </div>
+                </div>
+
+                <!---THUỘC TÍNH ẨN-->
+                <input type="hidden" name="idRatingTour" id="idRatingTour">
+                <input type="hidden" name="comment" id="comment">
+                <input type="hidden" name="numstars" id="numstars">
+                <input type="hidden" name="orderTourId" id="orderTourId">
+                <input type="hidden" name="emailRate" id="emailRate">
+                <input type="hidden" name="emailEnterprise" id="emailEnterprise">
+            </form>
+        </div>
+
+        <!---HỘP THOẠI REPLY EVENT-->
+        <div id="modalFeedBackEvent" class="modal">
+
+            <!-- Modal content -->
+            <form th:action="@{/enterprise/feebdback_event}" method="post">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span id="close" class="close">&times;</span>
+                        <p>PHẢN HỒI EVENT</p>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col_line1" style="border-right: 1px solid orange;">
+                            <div>
+                                <img class="imgcommentquai" id="hinhAnhAccountEvent" onerror="this.src='/assets/images/userImage.png'">
+                                <p style="padding-top: 20px;" id="tenUserEvent"></p>
+                            </div><br><br>
+                            <hr>
+                            <div style="padding-top: 10px;">
+                                <p>Đánh giá của khách hàng: </p>
+                                <p id="commentUserEvent"></p>
+                            </div>
+                        </div>
+                        <div class="col_line1">
+                            <textarea style="width: 100%; outline: none;     resize: none;" name="replyUserEvent"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <a id="xacNhan5">
+                            <button class="modal-button">Gửi</button>
+                        </a>
+                    </div>
+                </div>
+
+                <!---THUỘC TÍNH ẨN-->
+                <input type="hidden" name="idRatingEvent" id="idRatingEvent">
+                <input type="hidden" name="commentEvent" id="commentEvent">
+                <input type="hidden" name="numstarsEvent" id="numstarsEvent">
+                <input type="hidden" name="orderEventId" id="orderEventId">
+                <input type="hidden" name="emailRateEvent" id="emailRateEvent">
+                <input type="hidden" name="emailEnterpriseEvent" id="emailEnterpriseEvent">
+            </form>
+        </div>
+    </main>
+</body>
+
+
+</html>
+<style>
+    .imgcommentquai {
+        margin: 5px 5px 0 5px;
+        border-radius: 100%;
+        width: 45px;
+        height: 40px;
+        float: left;
+    }
+</style>

@@ -1,0 +1,141 @@
+.menu {
+    margin-top: 10px;
+    background-color: #F0F5F8;
+    height: 60px;
+    transition: all 0.7s ease-in-out;
+    min-width: 100%;
+}
+
+.navbar-nav li:hover>ul.dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu {
+    position: relative;
+    background-color: unset;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    position: relative;
+    top: 0;
+    margin-top: -5px;
+    left: 100%;
+}
+
+.dropdown-menu>li>a:hover::after {
+    text-decoration: underline;
+    transform: rotate(-90deg);
+}
+
+.dropdown-menu {
+    background-color: rgb(241, 172, 92, 0.97);
+}
+
+a.nav-link {
+    color: black;
+}
+
+
+a.nav-link:hover {
+    color: #FF9500;
+}
+
+a.nav-link {
+    margin-left: 20px;
+    font-size: 20px;
+}
+
+li.nav-item.dropdown {
+    margin-left: 20px;
+    font-size: 20px;
+}
+
+li.nav-item {
+    margin-left: 20px;
+    font-size: 20px;
+}
+
+.hr1{
+    
+    border: 1px solid orange;
+    margin-top: 35px;
+    width: 97%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+@keyframes FadeIn {
+    0% {
+        opacity: 0;
+        -webkit-transition-duration: 0.8s;
+        transition-duration: 0.8s;
+        -webkit-transform: translateY(-10px);
+        -ms-transform: translateY(-10px);
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0);
+        pointer-events: auto;
+        transition: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+}
+
+.navbar-nav .nav-link {
+    animation: FadeIn 1s cubic-bezier(0.65, 0.05, 0.36, 1);
+    animation-fill-mode: both;
+}
+
+.navbar-nav .nav-link:nth-child(1) {
+    animation-delay: .3s;
+}
+
+.navbar-nav .nav-link:nth-child(2) {
+    animation-delay: .6s;
+}
+
+.navbar-nav .nav-link:nth-child(3) {
+    animation-delay: .9s;
+}
+
+.navbar-nav .nav-link:nth-child(4) {
+    animation-delay: 1.2s;
+}
+
+.navbar-nav .nav-link:nth-child(5) {
+    animation-delay: 1.5s;
+}
+
+/* ĐỊNH DẠNG LÁ CỜ */
+img.nations {
+    width: 32px;
+    height: 24px;
+    margin-left: 132px;
+    border-radius: 10%;
+    -moz-border-radius: 10%;
+    -webkit-border-radius: 10%;
+    overflow: hidden; 
+    transition: all 0.5s;
+}
+img.nations1 {
+    width: 32px;
+    height: 24px;
+    border-radius: 10%;
+    -moz-border-radius: 10%;
+    -webkit-border-radius: 15%;
+    overflow: hidden; 
+    transition: all 0.5s;
+}
+
+img.nations1:hover {
+	-webkit-transform: scale(0.8);
+            transform: scale(0.8);
+}
+
+img.nations:hover {
+	-webkit-transform: scale(0.8);
+            transform: scale(0.8);
+}

@@ -1,0 +1,16 @@
+.thanhNgan{
+    background-color: rgba(230, 218, 201, 0.41);
+}
+#iconThanhNgan{
+    width: 25px;
+}
+.buttonThanhNgan{
+    width: 225px;
+    height: 70px;
+    border: none;
+    background-color: white;
+    margin: 10px;
+    text-align: left;
+    margin-left: 50px;
+    pointer-events: none;
+}

@@ -1,0 +1,208 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout :: dynamic(~{::main})}">
+
+<body>
+    <main>
+        <div th:replace="/Profile/menu_Profile"></div>
+        <div class="container-fluid" style="background-color: #F0F6F9">
+            <br>
+            <div class="nhapTT">
+                <h3 class="text10" style="margin-bottom: 20px;">Lịch sử đơn đặt</h3>
+                <div class="gach"></div>
+
+                <!-- Trạng thái các sản phẩm nằm đây nè nha -->
+                <!-- Cho vòng lập chạy bên trong là ra -->
+                <div th:each="ords : ${orderListFinal}" th:object="${ords}" class="OrderStatus">
+                    <div class="gach2"></div>
+                    <div class="row" style="margin-left: 50px;margin-right: 50px;">
+                   		<div class="col-6">
+                            <a class="text13">[[*{tourPost.account.fullname}]]</a>
+                            <a  th:data-tourOrderFolder="*{tourPost.folder}" 
+                                th:data-tourOrderImage="*{tourPost.primaryImage}" 
+                                th:data-tourOrderId="*{orderTourId}" 
+                                th:data-tourOrderName="*{tourPost.name}" 
+                                th:data-tourOrderStart="*{#dates.format(startDate,'dd-MM-yyyy')}"
+                                th:data-tourOrderNote="*{note}" 
+                                th:data-tourOrderNL="*{quantityAdult}" 
+                                th:data-tourOrderTE="*{quantityChildren}" 
+                                th:data-tourOrderEB="*{quantityBaby}" 
+                                th:data-tourOrderDis="*{discount}" 
+                                th:data-tourOrderPay="*{payment}" 
+                                th:data-tourOrderTotal="*{#numbers.formatDecimal(sumPrice, 0,'POINT', 0,'COMMA')}"
+                                onclick="showModalDetailDonTour(this.getAttribute('data-tourOrderFolder'),
+                                                                this.getAttribute('data-tourOrderImage'),
+                                                                this.getAttribute('data-tourOrderId'),
+                                                                this.getAttribute('data-tourOrderName'),
+                                                                this.getAttribute('data-tourOrderStart'),
+                                                                this.getAttribute('data-tourOrderNote'),
+                                                                this.getAttribute('data-tourOrderNL'),
+                                                                this.getAttribute('data-tourOrderTE'),
+                                                                this.getAttribute('data-tourOrderEB'),
+                                                                this.getAttribute('data-tourOrderDis'),
+                                                                this.getAttribute('data-tourOrderPay'),
+                                                                this.getAttribute('data-tourOrderTotal'))">
+                                <button class="huybtndetail"><i class="fas fa-search"></i> Chi tiết</button> 
+                            </a>
+                            </div>
+                    <div class="col-6">
+                        <a id="statusOrder" class="text14 float-right">[[*{status}]]</a>
+                        </div>
+                    </div>
+                    <div class="gach3"></div>
+
+                    <div class="cart-tourTT">
+                        <div class="infTT row">
+                            <div class="col-8">
+                                <div class="row">
+                                    <img th:src="@{|/assets/images/tour/*{tourPost.folder}/*{tourPost.primaryImage}|}" class="imgInfTT col-2">
+                                    <div class="col-8">
+                                        <h3>[[*{tourPost.name}]]</h3>
+                                        <a>ID</a> <a style="font-weight: bold; margin-left: 7px;">[[*{orderTourId}]]</a>
+                                        <br>
+                                        <a>Thời gian</a> <a style="font-weight: bold; margin-left: 7px;">[[*{tourPost.time}]]</a>
+                                        <br>
+                                        <a>Khởi hành</a> <a style="font-weight: bold;">[[*{#dates.format(startDate, 'dd-MM-yyyy')}]]</a>
+                                        <br>
+                                        <a>Ngày đặt</a> <a style="font-weight: bold;">[[*{#dates.format(createDate, 'dd-MM-yyyy hh:mm a')}]]</a>
+                                    </div>
+                                </div>
+                                <p>Số tiền thanh toán sau khi hoàn tất</p>
+                            </div>
+
+                            <div class="col-4" style="text-align: right;margin-top: auto;display: block;">
+                                <div class="row">
+                                    <div style="margin-left: auto;">
+                                        <box-icon name='dollar-circle' type="solid" animation='tada' color='#df0000' style="width: 60px; height: 60px;"></box-icon>
+                                    </div>
+                                    <div style="margin-top: auto;margin-bottom: auto;">
+                                        <a class="sumMoney">Tổng tiền:</a>
+                                        <a class="sumMoney" style="color: red;">[[*{#numbers.formatDecimal(sumPrice, 0, 'POINT', 0, 'COMMA')}]]đ</a>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div style="margin-left: auto;">
+                                        <a th:if="*{tourPost.isDeleted == false}" 
+                                        th:data-idorder="*{orderTourId}" 
+                                        th:data-name="*{tourPost.name}" 
+                                        th:data-folder="*{tourPost.folder}" 
+                                        th:data-image="*{tourPost.primaryImage}" 
+                                        onclick="hienHopThoaiDanhGia(this.getAttribute('data-idorder'),
+                                                                    this.getAttribute('data-name'),
+                                                                    this.getAttribute('data-image'),
+                                                                    this.getAttribute('data-folder'))">
+                                            <button class="btn nutMauTrang" data-toggle="modal" data-target="#exampleModalCenter">Đánh giá</button>
+                                        </a>
+
+                                        <a th:if="*{tourPost.isDeleted == false}" th:href="@{|/order/tour/*{tourPost.tourId}|}">
+                                            <button class="btn nutMauDo">Đặt lại</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <br>
+        </div>
+        <!-- HỘP THOẠI ĐÁNH GIÁ -->
+        <div class="modal fade" id="hopThoaiRate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <form th:action="@{/rating/tour}" method="post">
+                        <div class="modal-header" style="background-color: #E4F3FD;">
+                            <div class="row">
+                                <div class="col-4">
+                                    <img id="tourImage" class="img-fluid" style="width: 200px; height: 170px; min-width: 200px; min-height: 170px;" onerror="this.src='/assets/icon/Photos-new-icon.png'">
+                                </div>
+                                <div class="col-8">
+                                    <div class="row">
+                                        <input type="hidden" name="layId" id="layId">
+                                        <h3 id="tourName" style="text-align: left; width: 90%;"></h3>
+                                    </div>
+                                    <div style="background-color: white; width: 100%;" class="row">
+
+                                        <p style="margin-left: 20px; margin-right: auto;
+                            display: table-row-group;">Bạn cảm thấy dịch vụ thế nào?</p>
+
+                                        <div class="text-center rating" style="width: 70%;">
+                                            <input type="radio" id="star5" name="rating" value="5" /><label for="star5" class="full" title="Awesome"></label>
+                                            <input type="radio" id="star4.5" name="rating" value="4.5" /><label for="star4.5" class="half"></label>
+                                            <input type="radio" id="star4" name="rating" value="4" /><label for="star4" class="full"></label>
+                                            <input type="radio" id="star3.5" name="rating" value="3.5" /><label for="star3.5" class="half"></label>
+                                            <input type="radio" id="star3" name="rating" value="3" /><label for="star3" class="full"></label>
+                                            <input type="radio" id="star2.5" name="rating" value="2.5" /><label for="star2.5" class="half"></label>
+                                            <input type="radio" id="star2" name="rating" value="2" /><label for="star2" class="full"></label>
+                                            <input type="radio" id="star1.5" name="rating" value="1.5" /><label for="star1.5" class="half"></label>
+                                            <input type="radio" id="star1" name="rating" value="1" /><label for="star1" class="full"></label>
+                                            <input type="radio" id="star0.5" name="rating" value="0.5" /><label for="star0.5" class="half"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <textarea class="danhgia" id="comment" name="comment" cols="100" rows="5" style="resize: none; width: 100%;height: 100%"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" style="width: 100px; height: 50px;" data-dismiss="modal">Hủy</button>
+                            <button type="submit" id="xacNhanDang" class="btn" style="background-color: #FF5722; color: white;
+                        width: 100px; height: 50px;">Đăng</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- MODAL CHI TIẾT ĐƠN -->
+        <div class="modal fade" id="modalDetailDonTour" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content" style="width: 100%;">
+                    <div class="modal-header" style="background-color: #E4F3FD;">
+                        <div class="row">
+                            <div class="col-4">
+                                <img id="tourOrderImage" class="img-fluid" style="width: 200px; height: 170px; min-width: 200px; min-height: 170px;" onerror="this.src='/assets/icon/Photos-new-icon.png'">
+                            </div>
+                            <div class="col-8">
+                                <div class="row">
+                                    <h3 id="tourOrderName" class="detailorder"></h3>
+                                </div>
+                                <div style="width: 100%;" class="row">
+                                    <p class="detailorder">ID: <span id="tourOrderId"></span></p>
+                                    <p class="detailorder">Ngày đi: <span id="tourOrderStart"></span></p>
+                                    <p class="detailorder">Ghi chú: <span id="tourOrderNote"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>S.L Người lớn</th>
+                                    <th>S.L Trẻ em</th>
+                                    <th>S.L Em bé</th>
+                                    <th>Giảm giá</th>
+                                    <th>Phương thức</th>
+                                    <th>Tổng tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td id="tourOrderNL"></td>
+                                    <td id="tourOrderTE"></td>
+                                    <td id="tourOrderEB"></td>
+                                    <td><span id="tourOrderDis"></span>%</td>
+                                    <td id="tourOrderPay"></td>
+                                    <td><span id="tourOrderTotal"></span>đ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

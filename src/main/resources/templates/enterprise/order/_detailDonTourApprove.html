@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/enterprise/index :: dynamic(~{::main})}">
+
+<body>
+    <main>
+        <div style=" background-color:orange; color: black; padding: 1px 10px; margin-top: 20px;font-family: Tahoma, sans-serif;">
+            <h2>Quản lý đơn đặt</h2>
+        </div>
+
+        <div class="table" style=" margin: 0 30px;">
+            <div>
+                <h2 style="color: gray;font-family: Tahoma, sans-serif;">Thông tin đơn đặt (Tour)</h2>
+                <hr>
+            </div>
+            <div class="thembai" style=" margin: 20px;" th:object="${orderDetail}">
+                <div class="col_line4">
+                    <div class="col_line6"><b class="labelinfo">Tên dịch vụ:</b></div>
+                    <div class="col_line5">[[*{tourPost.name}]]</div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b class="labelinfo">ID:</b></div>
+                    <div class="col_line5">[[*{orderTourId}]]</div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b class="labelinfo">Tên khách hàng:</b></div>
+                    <div class="col_line5">[[*{account.fullname}]]</div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b class="labelinfo">Số điện thoại:</b></div>
+                    <div class="col_line5">[[*{account.phone}]]</div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b class="labelinfo">Ngày đặt:</b></div>
+                    <div class="col_line5">[[*{#dates.format(createDate, 'dd-MM-yyyy hh:mm:ss')}]]</div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b class="labelinfo">Ngày đi:</b></div>
+                    <div class="col_line5">[[*{#dates.format(startDate, 'dd-MM-yyyy')}]]</div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b class="labelinfo">Loại vé:</b></div>
+                    <div class="col_line5">-------------------------------------------------------------------------</div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b style="font-weight: 100; margin-left:10px" class="labelinfo">Người lớn:</b></div>
+                    <div class="col_line5">[[*{quantityAdult}]]</div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b style="font-weight: 100; margin-left:10px" class="labelinfo">Trẻ em:</b></div>
+                    <div class="col_line5">[[*{quantityChildren}]]</div>
+
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"> <b style="font-weight: 100; margin-left:10px" class="labelinfo">Em bé:</b></div>
+                    <div class="col_line5">[[*{quantityBaby}]]</div>
+
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b class="labelinfo">Tổng tiền:</b></div>
+                    <div class="col_line5">[[*{#numbers.formatDecimal(sumPrice, 0, 'POINT', 1, 'COMMA')}]]</div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b class="labelinfo">Thanh toán trước:</b></div>
+                    <div class="col_line5">,,,chưa biết...</div>
+                </div>
+                <div class="col_line4">
+                    <div class="col_line6"><b class="labelinfo">Ghi chú:</b></div>
+                    <div class="col_line5">
+                        <div class="descriptionNote">[[*{note}]]</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

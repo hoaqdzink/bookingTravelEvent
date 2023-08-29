@@ -1,0 +1,31 @@
+<div>
+  <!--Slideshow thuong hieu-->
+  <div class="container text-center my-3">
+    <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
+      <div class="carousel-inner w-100" role="listbox">
+        <div class="carousel-item row no-gutters active" id="vaoSlide">
+          <!-- Tour tây bắc -->
+          <div class="col-2 float-left text-center" id="slideShow1" th:each="r : ${regions}">
+            <div class="inland">
+              <a th:href="@{|/tour/list?rid=${r.regionId}|}" style="text-decoration: dashed;">
+                <img class="img-fluid slideShow-img" th:src="@{|/assets/images/index/slideshow/${r.icon}|}">
+                <p class="mt-3 text-body" th:utext="${r.name}"></p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a class="carousel-control-prev" href="#recipeCarousel" role="button" data-slide="prev" id="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true" style="color:black; margin-right: 5cm;">
+          <h1><i class="fa fa-angle-left"></i></h1>
+        </span>
+      </a>
+      <a class="carousel-control-next" href="#recipeCarousel" role="button" data-slide="next" id="next">
+        <span class="carousel-control-next-icon" aria-hidden="true" style="color: black; margin-left: 5cm;">
+          <h1><i class="fa fa-angle-right"></i></h1>
+        </span>
+      </a>
+    </div>
+  </div>
+</div>

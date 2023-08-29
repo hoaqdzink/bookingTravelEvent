@@ -1,0 +1,28 @@
+.footer-Header{
+    background-color: black;
+}
+#tieudefooter{
+    color: white;
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
+#tieudefooter2{
+    color: white;
+    margin-top: 50px;
+}
+footer a{
+    color: white;
+
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 22px;
+}
+footer a:hover{
+    color: orange;
+    text-decoration: dotted;
+}
+.DiaChi{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

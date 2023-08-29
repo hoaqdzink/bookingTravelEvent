@@ -1,0 +1,14 @@
+<div class="container-fluid bodyHeader">
+    <h1 id="textLogo">Booking Travel & Event</h1>
+    <h4 id="text2">[[#{bd.hd.tren}]]</h4>
+
+    <p id="text3">[[#{bd.hd.duoi}]]</p>
+    <div class="conten subscribe">
+      <form class="form-inline" th:action="@{/search/tour}">
+        <div class="form-group">
+          <input type="text" name="keyword"class="form-control transparent" placeholder="Tìm bất kì">
+          <button type="submit" class="btn btn-warning btn-fill seach1">[[#{bd.hd.search}]]</button>
+        </div>
+      </form>
+    </div>
+  </div>

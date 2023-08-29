@@ -1,0 +1,18 @@
+<div class="laCo col">
+    <div class="row">
+        <div class="col-8">
+            <a th:href="@{?lang=vi}"><img class="nations" src="/assets/icon/VN.PNG"></a>
+            <a th:href="@{?lang=en}"><img class="nations1" src="/assets/icon/My.PNG"></a>
+
+            <th:block th:unless="${#request.remoteUser}">
+                <a th:href="@{/login}" id="text1">[[#{mn.one.login}]]</a>
+            </th:block>
+        </div>
+
+        <div class="col-4">
+            <a href="https://www.facebook.com/travel.since2021"><i class="fab fa-facebook-square" id="mxh"></i></a>
+            <a href="#"><i class="fab fa-instagram-square" id="mxh"></i></a>
+            <a id="text4">[[#{mn.one.phone}]]: (+84) 399989849</a>
+        </div>
+    </div>
+</div>

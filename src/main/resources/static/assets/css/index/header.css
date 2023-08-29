@@ -1,0 +1,240 @@
+.Booking-Travel{
+    width: 100%;
+    height: 100%;
+}
+/* Video */
+video {
+    overflow: hidden;
+    width: 100%;
+    background-color: black;
+}
+img.nations {
+    width: 32px;
+    height: 24px;
+    margin-left: 132px;
+    border-radius: 10%;
+    -moz-border-radius: 10%;
+    -webkit-border-radius: 10%;
+    overflow: hidden; 
+    transition: all 0.5s;
+}
+img.nations1 {
+    width: 32px;
+    height: 24px;
+    border-radius: 10%;
+    -moz-border-radius: 10%;
+    -webkit-border-radius: 15%;
+    overflow: hidden; 
+    transition: all 0.5s;
+}
+
+img.nations1:hover {
+	-webkit-transform: scale(0.8);
+            transform: scale(0.8);
+}
+
+img.nations:hover {
+	-webkit-transform: scale(0.8);
+            transform: scale(0.8);
+}
+/* menu 1 */
+#co {
+    font-size: 20px;
+    width: 135px;
+    background-color: rgba(255, 255, 255, 0);
+    border: 1px solid rgba(238, 238, 238, 0);
+    color: white;
+    text-align: right;
+}
+
+#co1 {
+    background-color: rgba(255, 255, 255, 0);
+    border: 1px solid rgba(238, 238, 238, 0);
+    color: black;
+    text-align: left;
+}
+
+#text1 {
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+}
+
+#text1:hover {
+    color: #FF9500;
+}
+
+#mxh {
+    font-size: 27px;
+    color: white;
+    margin-left: 5px;
+}
+
+#mxh:hover {
+    color: #FF9500;
+}
+
+.laCo {
+    position: absolute;
+    margin-top: 25px;
+    z-index: 1;
+}
+
+#text4 {
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+/* menu */
+.menu {
+    position: fixed;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.3);
+    height: 60px;
+    margin-top: 65px;
+    transition: all 0.7s ease-in-out;
+    min-width: 100%;
+}
+
+nav.sticky {
+    background-color: #F0F6F9;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+    height: 60px;
+    margin-top: 0;
+    z-index: 2;
+}
+
+.img-fluid {
+    margin-left: 80px;
+}
+
+.navbar-nav li:hover>ul.dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu {
+    position: relative;
+    background-color: unset;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    position: relative;
+    top: 0;
+    margin-top: -5px;
+    left: 100%;
+}
+
+.dropdown-menu>li>a:hover::after {
+    text-decoration: underline;
+    transform: rotate(-90deg);
+}
+
+.dropdown-menu {
+    background-color: white;
+}
+
+a.nav-link {
+    color: white;
+}
+
+nav.sticky a.nav-link {
+    color: black;
+}
+
+nav.sticky a.nav-link:hover {
+    color: #FF9500;
+}
+
+a.nav-link:hover {
+    color: #FF9500;
+}
+
+a.nav-link {
+    margin-left: 0px;
+    font-size: 20px;
+}
+
+li.nav-item.dropdown {
+    margin-left: 20px;
+    font-size: 20px;
+}
+
+li.nav-item {
+    margin-left: 20px;
+    font-size: 20px;
+}
+
+/* body header */
+.bodyHeader {
+    position: absolute;
+}
+
+#textLogo {
+    font-family: 'Grand Hotel', cursive;
+    font-size: 82px;
+
+    color: #FFFFFF;
+    position: relative;
+    text-align: center;
+    text-shadow: 0 0 10px rgb(0 0 0 / 33%);
+    margin-top: 165px;
+}
+
+#text2 {
+    position: relative;
+    color: #FFFFFF;
+    text-align: center;
+    margin-top: 30px;
+
+}
+
+#text3 {
+    position: relative;
+    text-align: center;
+    color: white;
+    margin-top: 125px;
+}
+
+input.form-control.transparent {
+    width: 350px;
+    height: 45px;
+
+    background-color: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(238, 238, 238, 0.27);
+    color: #FFFFFF;
+}
+
+.form-inline {
+    display: inline-block;
+}
+
+.seach1 {
+    margin-left: 10px;
+    background-color: #FF9500;
+    border-color: #FF9500;
+    height: 45px;
+    width: 93px;
+    color: #FFFFFF;
+    opacity: 1;
+}
+
+.conten {
+    position: relative;
+    z-index: 1;
+    margin: 0 auto;
+    text-align: center;
+}
+a#co1:hover{
+	background-color: #86acff;
+}
+
+.likeProduct{
+	color: white;
+	text-decoration: none;
+}
+.likeProduct:hover{
+	color: orange;
+	text-decoration: none;
+}

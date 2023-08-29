@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/admin/index :: dynamic(~{::main})}">
+
+<body>
+    <main>
+        <div ng-app="reportTop-app" ng-controller="reportTop-ctrl">
+            <script>
+                google.charts.load("current", {
+                    packages: ["corechart"]
+                });
+                google.charts.setOnLoadCallback(chartReady);
+
+                var ready = false;
+
+                function chartReady() {
+                    ready = true;
+                }
+
+                function drawChartTop(itemTop) {
+                    var topEnterprise = [
+                        ['Doanh nghiệp', 'Doanh thu Tour'],
+                    ]
+                    topEnterprise.push(...itemTop);
+
+                    var data = google.visualization.arrayToDataTable(topEnterprise);
+
+                    var options = {
+                        title: 'Top doanh nghiệp có doanh thu tour cao nhất',
+                        pieHole: 0.4,
+                    };
+
+                    var chart = new google.visualization.PieChart(document.getElementById('donutchartTour'));
+                    chart.draw(data, options);
+                }
+
+                function drawChartTops(itemTops) {
+                    var topEnterprise = [
+                        ['Doanh nghiệp', 'Doanh thu Event'],
+                    ]
+                    topEnterprise.push(...itemTops);
+
+                    var data = google.visualization.arrayToDataTable(topEnterprise);
+
+                    var options = {
+                        title: 'Top doanh nghiệp có doanh thu event cao nhất',
+                        pieHole: 0.4,
+                    };
+
+                    var chart = new google.visualization.PieChart(document.getElementById('donutchartEvent'));
+                    chart.draw(data, options);
+                }
+            </script>
+        </div>
+
+        <div id="donutchartTour" style="width: 50%; height: 500px; float: left;"></div>
+        <div id="donutchartEvent" style="width: 50%; height: 500px; float: right;"></div>
+        <script src="/assets/js/report/report-top-enterprise.js"></script>
+    </main>
+</body>
+
+</html>

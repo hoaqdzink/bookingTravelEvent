@@ -1,0 +1,87 @@
+<nav class="navbar navbar-expand-lg col menu">
+    <a href=""><img style="width: 92px; height: 60px;" src="/assets/images/logo.png" class="img-fluid"></a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" th:href="@{/}">
+            [[#{mn.chinh.home}]] <span class="sr-only">(current)</span></a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="" id="navbarDropdownLink" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            [[#{mn.chinh.tour}]]
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownLink">
+            <li class="dropdown-submenu">
+              <a class="dropdown-item dropdown-toggle">Tour theo vùng</a>
+              <ul class="dropdown-menu">
+                  <th:block th:each="r : ${regions}" th:object="${r}">
+                    <li><a th:href="@{|/tour/list?rid=*{regionId}|}" class="dropdown-item">[[*{name}]]</a></li>
+                  </th:block>
+              </ul>
+            </li>
+
+            <li class="dropdown-submenu">
+              <a class="dropdown-item dropdown-toggle">Tour theo loại</a>
+              <ul class="dropdown-menu dropmenu text-">
+                  <th:block th:each="t : ${types}" th:object="${t}">
+                    <li><a th:href="@{|/tour/list?tid=*{typeId}|}" class="dropdown-item">[[*{mainName}]]</a></li>
+                  </th:block>
+              </ul>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href=""  id="navbarDropdownLink" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            [[#{mn.chinh.event}]]
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownLink">
+            <li class="dropdown-submenu">
+              <th:block th:each="e : ${event}" th:object="${e}">
+                <a  th:href="@{|/event/list?ev=*{eventId}|}" class="dropdown-item">[[*{name}]]</a>
+              </th:block>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+        	<th:block th:if="${#request.isUserInRole('ENTE')}">
+          		<a class="nav-link" th:href="@{/enterprise/home}">Quản trị doanh nghiệp</a>
+          	</th:block>
+        </li>
+        <li class="nav-item">
+        	<th:block th:if="${#request.isUserInRole('DIRE') or #request.isUserInRole('STAF')}">
+          		<a class="nav-link" th:href="@{/admin/home}">Quản trị Admin</a>
+          	</th:block>
+        </li>
+
+      </ul>
+      
+      <ul class="navbar-nav ml-auto" style="margin-right: 10%;" >
+        <li class="nav-item  m-auto">
+          <a th:href="@{/list/favorite}" class="nav-link likeProduct">Yêu thích <i class="fas fa-heart" style="color: red;">{{favorite.count}}</i></a >
+        </li >
+	    <li class="nav-item dropdown" th:if="${#request.remoteUser}" th:object="${userAll}">
+	        <a class="nav-link" style="margin-left: 5%;" id="navbarDropdownLink" role="button"
+	          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	          <img th:src="@{|/assets/images/account/*{folder}/*{image}|}" onerror="this.src='/assets/images/userImage.png'"
+	          	style="width: 50px; height: 50px; border: 1px #ffa500 solid; padding: 1px; border-radius: 50%; -moz-border-radius: 50%; -webkit-border-radius: 50%;">
+	        </a>
+	        <ul class="dropdown-menu" aria-labelledby="navbarDropdownLink">
+	          <li class="dropdown-submenu">
+              <th:block th:if="${#request.isUserInRole('CUST') or #request.isUserInRole('STAF') or #request.isUserInRole('DIRE')}">
+	              <a th:href="@{|/profile/profile_information/${#request.remoteUser}|}" class="dropdown-item" style="color: orange;" ><i class="fas fa-user"></i> Tài khoản</a>
+              </th:block>
+              <th:block th:if="${#request.isUserInRole('ENTE')}"> 
+                <a th:href="@{|/profile/profile_information_enterprise/${#request.remoteUser}|}" class="dropdown-item" style="color: orange;" ><i class="fas fa-user"></i> Tài khoản</a>
+	            </th:block>  
+                <a th:href="@{/security/logoff}" class="dropdown-item" style="color: orange;" ><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+	          </li>
+	        </ul>
+	    </li>
+      </ul>
+    </div>
+  </nav>

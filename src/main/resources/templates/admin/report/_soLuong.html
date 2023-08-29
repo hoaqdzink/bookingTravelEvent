@@ -1,0 +1,63 @@
+<div ng-app="report-app">
+    <div ng-controller="report-ctrl">
+        <script>
+            google.charts.load("current", {packages: ["corechart"]});
+    
+            google.charts.setOnLoadCallback(chartReady);
+    
+            var ready = false;
+    
+            function chartReady() {
+                ready = true;
+            }
+    
+            function drawChartsoLuongLoai(items) {
+                var soLuongLoai = [
+                    ['Loại', 'Số lượng'],
+                ]
+                soLuongLoai.push(...items);
+    
+                var data = google.visualization.arrayToDataTable(soLuongLoai);
+    
+                var options = {
+                    title: 'Số lượng tour theo loại',
+                    is3D: true,
+                };
+                var chart = new google.visualization.PieChart(document.getElementById('piechart_3d1'));
+                chart.draw(data, options);
+            }
+        </script>
+    </div>
+    
+    <div ng-controller="report-sluong-ctrl">
+        <script>
+            google.charts.load("current", {packages: ["corechart"]});
+    
+            google.charts.setOnLoadCallback(chartReady);
+    
+            var ready = false;
+    
+            function chartReady() {
+                ready = true;
+            }
+    
+            function drawChartsoLuongXe(items) {
+                var soLuongXe = [
+                    ['Phương tiện', 'Số lượng'],
+                ]
+                soLuongXe.push(...items);
+    
+                var data = google.visualization.arrayToDataTable(soLuongXe);
+    
+                var options = {
+                    width: 900,
+                    height: 500,
+                    title: 'Số lượng tour theo phương tiện',
+                    is3D: true,
+                };
+                var chart = new google.visualization.PieChart(document.getElementById('piechart_3d2'));
+                chart.draw(data, options);
+            }
+        </script>
+    </div>
+</div>

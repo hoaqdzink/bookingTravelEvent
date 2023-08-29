@@ -1,0 +1,92 @@
+<div class="form signupForm">
+    <form name="myFormEnter" onsubmit="return validateRegisterEnter()" id="regForm2" th:action="@{/security/register_enterprise}" th:object="${account}" method="post" onkeydown="return event.key != 'Enter';">
+        <div class="prograss_bar2">
+            <span class="step2">1</span>
+            <span class="step2">2</span>
+            <span class="step2">3</span>
+        </div>
+        <h1>Đăng ký Doanh nghiệp</h1>
+        <div class="status-text2"></div>
+        <!-- One "tab2" for each step in the form: -->
+        <div class="tab2">
+            <p style="color: green;" th:text="${messageEnterprise}"></p>
+            <input name="username" th:value="*{username}" class="input2" placeholder="Tên đăng nhập" onkeypress="return event.charCode != 32">
+            <div class="text-danger" th:text="${error1Enterprise}"></div>
+            <div id="messnamedn" class="text-danger"></div>
+
+            <input th:field="*{password}" name="password" class="input2" type="password" placeholder="Mật khẩu" onkeypress="return event.charCode != 32">
+            <div id="messpassdn" class="text-danger"></div>
+
+            <input name="confirmPassword" class="input2" type="password" placeholder="Xác nhận mật khẩu" onkeypress="return event.charCode != 32">
+            <div id="messconpassdn" class="text-danger"></div>
+            <div style="text-align: center;">
+                <button style="text-align: center;" type="button" id="nextBtn" onclick="nextPrev2(1)">Tiếp tục</button>
+            </div>
+        </div>
+
+        <div class="tab2">
+
+            <input th:field="*{fullname}" name="fullname" type="text" placeholder="Tên doanh nghiệp" oninput="this.className = ''">
+            <div id="messfullnamedn" class="text-danger"></div>
+
+
+
+
+            <input th:field="*{nameAdmin}" name="nameAdmin" type="text" style="width: 60%;" placeholder="Người quản lý" oninput="this.className = ''">
+            <div id="messnameAdmindn" class="text-danger"></div>
+
+            <input th:field="*{taxCode}" name="taxCode" maxlength="13" onkeypress="return isNumberKey(event)" style="position: absolute;margin-left: 0; width: 26.5%;" type="text" placeholder="Mã số thuế" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');">
+            <div id="messtaxCodedn" class="text-danger"></div>
+
+            <input th:field="*{email}" name="email" placeholder="Email" onkeypress="return event.charCode != 32">
+            <div id="messemaildn" class="text-danger"></div>
+            <div class="text-danger" th:text="${error2Enterprise}"></div>
+
+            <input th:field="*{phone}" class="input" type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');" placeholder="Số điện thoại">
+            <div id="messphonedn" class="text-danger"></div>
+
+            <input th:field="*{address}" placeholder="Địa chỉ" type="text" oninput="this.className = ''">
+            <div id="messaddressdn" class="text-danger"></div>
+            <div style="text-align: center;">
+                <button type="button" id="prevBtn" onclick="nextPrev2(-1)">Trở lại</button>
+                <button type="button" id="nextBtn" onclick="nextPrev2(1)">Tiếp tục</button>
+            </div>
+        </div>
+
+        <div class="tab2">
+            Điều khoản về dịch vụ
+            <textarea disabled cols="30" rows="10">Chúng tôi không bán dữ liệu cá nhân của bạn cho các nhà quảng cáo và cũng không chia sẻ thông tin trực tiếp nhận dạng bạn (chẳng hạn như tên, địa chỉ email hoặc thông tin liên hệ khác) với những đơn vị này trừ khi được bạn cho phép cụ thể. Thay vào đó, các nhà quảng cáo có thể cho chúng tôi biết </textarea>
+            <label class="checkboxdk2">
+                <input checked class="check_input" id="checkbox2" type="checkbox">
+                <div class="check_box"></div>
+                Tôi đã đọc và đồng ý về các điểu khoản.
+            </label>
+            <div style="text-align: center;">
+                <button type="button" id="prevBtn" onclick="nextPrev2(-1)">Trở lại</button>
+                <button type="submit" id="submit2" onclick="nextPrev2(-2)">Xác nhận</button>
+            </div>
+        </div>
+
+
+
+        <!-- Circles which indicates the steps of the form: -->
+
+
+    </form>
+</div>
+
+<script>
+    const btnnext2 = document.querySelector("#submit2");
+    const check2 = document.getElementById("checkbox2")
+
+    check2.onclick = function() {
+        if (this.checked) {
+
+            btnnext2.classList.remove('active')
+            btnnext2.disabled = false;
+        } else {
+            btnnext2.classList.add('active')
+            btnnext2.disabled = true;
+        }
+    }
+</script>

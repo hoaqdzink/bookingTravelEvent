@@ -1,0 +1,487 @@
+.Rosona {
+    position: absolute;
+    color: white;
+    margin-top: 280px;
+    margin-left: 10px;
+}
+
+article {
+    height: 100%;
+    margin-bottom: 50px;
+}
+
+.DD-DD h5 {
+    margin-left: 15px;
+    margin-top: 30px;
+}
+
+.DD-DD {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.card-docDao {
+    overflow: hidden;
+    transition: all 0.5s;
+}
+
+.card-docDao img {
+    transition: all 0.5s;
+}
+
+.card-docDao:hover img {
+    margin-top: -25px;
+}
+
+
+/*  */
+
+.kMimg {
+    height: 280px;
+}
+
+.textInformation {
+    position: absolute;
+    margin-top: 30px;
+}
+
+.textInformation h5 {
+    width: 180px;
+    background-color: rgb(252, 6, 6, 0.7);
+    text-align: center;
+    margin-top: 50px;
+    color: white;
+    margin-left: 50px;
+}
+
+.textInformation h6 {
+    color: white;
+    margin-left: 50px;
+    text-shadow: black 0.1em 0.1em 0.2em
+}
+
+.textInformation h4 {
+    color: white;
+    margin-left: 50px;
+    text-shadow: black 0.1em 0.1em 0.2em
+}
+
+.textInformation p {
+    background-color: rgb(252, 166, 8, 0.8);
+    margin-left: 150px;
+    color: white;
+    width: 200px;
+    text-align: center;
+    box-shadow: black 0.1em 0.1em 0.2em;
+}
+
+
+/* du lich */
+
+
+/* sapa */
+
+.sapa {
+    overflow: hidden;
+    transition: all 0.5s;
+}
+
+.textsapa {
+    position: absolute;
+    color: white;
+    margin-top: 361px;
+    margin-left: 25px;
+}
+
+.img-sapa {
+    width: 359px;
+    height: 455px;
+    transition: all 0.5s;
+}
+
+.sapa:hover img {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+}
+
+
+/* hoian */
+
+.hoian {
+    overflow: hidden;
+    transition: all 0.5s;
+}
+
+.texthoian {
+    position: absolute;
+    color: white;
+    margin-top: 145px;
+    margin-left: 30px;
+}
+
+.img-hoian {
+    width: 750px;
+    height: 221px;
+    margin-left: 15px;
+    transition: all 0.5s;
+}
+
+.hoian:hover img {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+}
+
+
+/* ha giang */
+
+.hagiang {
+    overflow: hidden;
+    transition: all 0.5s;
+}
+
+.texthagiang {
+    position: absolute;
+    color: white;
+    margin-top: 145px;
+    margin-left: 18px;
+}
+
+.img-hagiang {
+    margin-top: 10px;
+    margin-right: 10px;
+    width: 360px;
+    height: 225px;
+    transition: all 0.5s;
+}
+
+.hagiang:hover img {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+}
+
+
+/* Vuung tau */
+
+.vungtau {
+    overflow: hidden;
+    transition: all 0.5s;
+}
+
+.textVungTau {
+    position: absolute;
+    color: white;
+    margin-top: 145px;
+    margin-left: 18px;
+}
+
+.img-vungtau {
+    margin-top: 10px;
+    width: 356px;
+    height: 225px;
+    transition: all 0.5s;
+}
+
+.vungtau:hover img {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+}
+
+
+/* Vịnh hạ long */
+
+.vinhhalong {
+    margin-top: 15px;
+    transition: all 0.5s;
+    width: 740px;
+    overflow: hidden;
+}
+
+.textVinhalong {
+    position: absolute;
+    color: white;
+    margin-left: 40px;
+    margin-top: 130px;
+}
+
+.img-vinhhalong {
+    width: 726px;
+    height: 221px;
+    transition: all 0.5s;
+    margin-left: 14px;
+}
+
+.vinhhalong:hover img {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+}
+
+
+/* Đà nẵng */
+
+.danang {
+    transition: all 0.5s;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.textdanang {
+    position: absolute;
+    color: white;
+    margin-left: 23px;
+    margin-top: 140px;
+}
+
+.img-danang {
+    width: 360px;
+    height: 225px;
+    transition: all 0.5s;
+}
+
+.danang:hover img {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+}
+
+
+/* nui cam */
+
+.nuicam {
+    transition: all 0.5s;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.textnuicam {
+    position: absolute;
+    color: white;
+    margin-left: 20px;
+    margin-top: 140px;
+}
+
+.img-nuicam {
+    width: 360px;
+    height: 225px;
+    transition: all 0.5s;
+}
+
+.nuicam:hover img {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+}
+
+
+/* Đà Lạt */
+
+.dalat {
+    transition: all 0.5s;
+    margin-top: 15px;
+    overflow: hidden;
+}
+
+.textdalat {
+    position: absolute;
+    color: white;
+    transition: all 0.5s;
+    margin-left: 20px;
+    margin-top: 372px;
+}
+
+.img-dalat {
+    width: 360px;
+    height: 457px;
+    transition: all 0.5s;
+}
+
+.dalat:hover img {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+}
+
+
+/*  */
+
+.nameNN {
+    position: absolute;
+    color: white;
+    margin-top: 280px;
+    margin-left: 15px;
+}
+
+.DLNN img {
+    width: 280px;
+    height: 370px;
+    transition: all 0.5s;
+}
+
+.DLNN {
+    height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    overflow: hidden;
+    transition: all 0.5s;
+}
+
+.DLNN:hover img {
+    margin-top: 20px;
+}
+
+
+/*  */
+
+.imgTeamBuilding {
+    width: 693px;
+    height: 500px;
+}
+
+.buttonTBuilding {
+    background-color: white;
+    width: 221px;
+    height: 57px;
+    color: #876A20;
+    border: 1px solid #876A20;
+    margin-top: 50px;
+    font-size: 20px;
+}
+
+.textTBuilding1 {
+    width: 544px;
+    height: 85px;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 28px;
+}
+
+.textTBuilding2 {
+    width: 607px;
+    height: 72px;
+    margin-top: 23px;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+}
+
+.TeamBuilding {
+    margin-top: 54px;
+}
+
+
+/*  */
+
+.meetingEvent {
+    margin-bottom: 50px;
+}
+
+.img-meeting {
+    width: 693px;
+    height: 500px;
+}
+
+.textMeeting {
+    width: 604px;
+    height: 48px;
+    margin-top: 30px;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+}
+
+
+/*  */
+
+.textEvent {
+    margin-top: 132px;
+}
+
+.imgEvent {
+    width: 693px;
+    height: 500px;
+}
+
+
+/*  */
+
+.imgNhaHang {
+    width: 693px;
+    height: 500px;
+}
+
+.nhahang {
+    margin-top: 50px;
+}
+
+.nhahang h4 {
+    margin-top: 30px;
+}
+
+.nhahang p {
+    width: 603px;
+    margin-top: 25px;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+
+/*  */
+
+.Events h4 {
+    position: absolute;
+    color: white;
+    margin-left: 100px;
+    margin-top: 400px;
+}
+
+.Events {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    transition: all 0.5s;
+    overflow: hidden;
+    height: 530px;
+}
+
+.Events img {
+    margin-top: 50px;
+    width: 355px;
+    height: 500px;
+    transition: all 0.5s;
+}
+
+.Events:hover img {
+    margin-top: 20px;
+}
+
+.buttonSeeAdd {
+    background-color: white;
+    width: 221px;
+    height: 57px;
+    color: #876A20;
+    border: 1px solid #876A20;
+    font-size: 20px;
+}
+
+.typeTB {
+    position: absolute;
+    background-color: #FF5722;
+    width: 110px;
+    height: 30px;
+    text-align: center;
+    font-size: 18px;
+    color: white;
+    margin-top: 15px;
+}
+
+.card-event {
+    margin-left: 20px;
+    margin-top: 5px;
+    margin-right: 5px;
+}

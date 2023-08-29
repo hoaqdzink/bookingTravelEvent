@@ -1,0 +1,139 @@
+.location {
+    position: absolute;
+    background-color: rgb(100, 100, 100, 0.8);
+    margin-top: 226px;
+}
+
+.card-title {
+    background-color: #DDE2E7;
+}
+
+.ten-bai-viet {
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 5px;
+}
+
+.seemore {
+    color: black;
+}
+
+.seemore:hover {
+    color: orange;
+    text-decoration: dotted;
+}
+
+.typical-tour:hover {
+    box-shadow: 0px 0px 3px 3px #ffc98b;
+}
+
+.tourP {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.sale {
+    font-weight: bold;
+    font-size: 14px;
+    position: absolute;
+    right: 5%;
+    top: -1%;
+    display: inline-block;
+    background: red;
+    color: white;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    line-height: 2.5rem;
+    transform: rotate(-20deg);
+    -webkit-animation: beat 1s ease infinite alternate;
+    animation: beat 1s ease infinite alternate;
+}
+
+.sale:before,
+.sale:after {
+    content: "";
+    position: absolute;
+    background: inherit;
+    height: inherit;
+    width: inherit;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transform: rotate(30deg);
+}
+
+.sale:after {
+    transform: rotate(60deg);
+}
+
+@-webkit-keyframes beat {
+    from {
+        transform: rotate(-20deg) scale(1);
+    }
+
+    to {
+        transform: rotate(-20deg) scale(1.1);
+    }
+}
+
+@keyframes beat {
+    from {
+        transform: rotate(-20deg) scale(1);
+    }
+
+    to {
+        transform: rotate(-20deg) scale(1.1);
+    }
+}
+
+.tymCheck {
+    height: 18px;
+    width: 18px;
+    background-color: white;
+    position: relative;
+    outline: none;
+    transform: rotate(45deg);
+    -webkit-appearance: none;
+    border-bottom: solid 2px;
+    border-right: solid 2px;
+    border-color: #fe0f42;
+}
+
+.tymCheck:before {
+    position: absolute;
+    content: "";
+    background-color: white;
+    height: 80%;
+    width: 100%;
+    top: -51%;
+    left: 17%;
+    border-radius: 75px 75px 0 0;
+    border-top: solid 2px;
+    border-right: solid 2px;
+    border-left: solid 2px;
+    border-color: #fe0f42;
+}
+
+.tymCheck:after {
+    position: absolute;
+    content: "";
+    background-color: white;
+    height: 70%;
+    width: 100%;
+    transform: rotate(-90deg);
+    border-radius: 75px 75px 0 0;
+    top: 32%;
+    right: 65%;
+    border-top: solid 2px;
+    border-right: solid 2px;
+    border-left: solid 2px;
+    border-color: #fe0f42;
+}
+
+.tymCheck:checked,
+.tymCheck:checked:before,
+.tymCheck:checked:after {
+    background-color: #fe0f42;
+}

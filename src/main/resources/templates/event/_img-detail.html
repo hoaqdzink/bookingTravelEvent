@@ -1,0 +1,110 @@
+
+    <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css">
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"></script>
+<div class="container-fluid">
+    <div class="col-sm-12">
+        <div class="service-thumb">
+            <a th:href="@{|/assets/images/event/*{folder}/*{primaryImage}|}" class="img-link">
+                <img style="margin-bottom: 10px; height: 500px; width: 100%; margin-top: 20px;"
+                th:src="@{|/assets/images/event/*{folder}/*{primaryImage}|}" alt="service" class="img-responsive">
+            </a>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="service-thumb">
+                    <a th:href="@{|/assets/images/event/*{folder}/*{extraImage1}|}" class="img-link">
+                        <img th:src="@{|/assets/images/event/*{folder}/*{extraImage1}|}" alt="service" class="img-responsive">
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="service-thumb">
+                    <a th:href="@{|/assets/images/event/*{folder}/*{extraImage2}|}" class="img-link">
+                        <img th:src="@{|/assets/images/event/*{folder}/*{extraImage2}|}" alt="service" class="img-responsive">
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="service-thumb">
+                    <a th:href="@{|/assets/images/event/*{folder}/*{extraImage3}|}" class="img-link">
+                        <img th:src="@{|/assets/images/event/*{folder}/*{extraImage3}|}" alt="service" class="img-responsive">
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="service-thumb">
+                    <a th:href="@{|/assets/images/event/*{folder}/*{extraImage4}|}" class="img-link">
+                        <img th:src="@{|/assets/images/event/*{folder}/*{extraImage4}|}" alt="service" class="img-responsive">
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="service-thumb">
+                    <a th:href="@{|/assets/images/event/*{folder}/*{extraImage5}|}" class="img-link">
+                        <img th:src="@{|/assets/images/event/*{folder}/*{extraImage5}|}" alt="service" class="img-responsive">
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="service-thumb">
+                    <a th:href="@{|/assets/images/event/*{folder}/*{extraImage6}|}" class="img-link">
+                        <img th:src="@{|/assets/images/event/*{folder}/*{extraImage6}|}" alt="service" class="img-responsive">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <nav>
+      <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Lịch trình</a>
+        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Mẹo vặt</a>
+        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Quy định chung</a>
+        <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">Đánh giá</a>   
+     </div>
+    </nav>
+    <div class="tab-content thongtinchitiet" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+              <span style="border-left:5px solid orange;"></span><span style="margin-left: 40px; font-size: 20px; font-weight: 600;">   Lịch trình</span>
+              <div  th:utext="*{descriptionEvent}"></div>
+      </div>
+      <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+              <span style="border-left:5px solid orange;"></span><span style="margin-left: 40px; font-size: 20px; font-weight: 600;">   Mẹo vặt</span>
+              <div th:replace="/event/__meo-vat.html"></div>        
+      </div>
+      <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+              <span style="border-left:5px solid orange;"></span><span style="margin-left: 40px; font-size: 20px; font-weight: 600;">   Quy định chung</span>
+              <div th:replace="/event/__quy-dinh.html"></div>          
+      </div>
+      <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+        <span style="border-left:5px solid orange;"></span><span style="margin-left: 40px; font-size: 20px; font-weight: 600;"> Đánh giá</span>
+        <div th:replace="/event/__danh-gia.html"></div>         
+    </div>
+    </div>
+  
+  </div>
+
+  <style>
+      .thongtinchitiet{
+          width: 100%;
+          border: 0;
+          height: auto;
+
+      }
+  </style>
+  <script>
+  (function () {
+    $('.img-link').magnificPopup({
+
+        gallery: {
+            enabled: true
+        },
+        removalDelay: 300, // Delay in milliseconds before popup is removed
+        mainClass: 'mfp-with-zoom', // this class is for CSS animation below
+        type: 'image'
+
+    });
+}());</script>

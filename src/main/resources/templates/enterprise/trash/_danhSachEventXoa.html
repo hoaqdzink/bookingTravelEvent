@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/enterprise/index :: dynamic(~{::main})}">
+
+<body>
+    <main>
+        <div>
+            <div style="height: 80px;">
+                <form th:action="@{/enterprise/search_trash_event}">
+                    <input class="timkiemadmin" type="text" name="keyword" placeholder="Tìm kiếm">
+                    <button class="timkiemadminbtn" type="submit"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+
+            <div style=" background-color:orange; color: black; padding: 1px 10px; margin-top: 20px;font-family: Tahoma, sans-serif;">
+                <h2>Quản lý đăng bài</h2>
+            </div>
+
+
+            <div class="table" style=" margin: 0 30px;">
+                <div>
+                    <h2 style="color: gray;font-family: Tahoma, sans-serif;">Danh sách event</h2>
+                    <hr>
+                </div>
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Thông tin chung</th>
+                                <th>Loại vé</th>
+                                <th>Vùng</th>
+                                <th>Danh mục </th>
+                                <th>Thời gian xóa</th>
+                                <th>Chỉnh sửa</th>
+                            </tr>
+                        </thead>
+                        <tbody id="slideShow1">
+                            <tr th:each="list,state : ${listTrashEvent}" th:object="${list}">
+                                <td style="width: 3%;">[[${state.count}]]</td>
+                                <td style="width: 25%;">
+                                    <b>[[*{name}]]</b>
+                                    <p>ID: [[*{eventPostId}]]</p>
+                                    <p>Thời gian: [[*{time}]]</p>
+                                    <p>Giá: [[*{#numbers.formatDecimal(priceEvent, 0, 'POINT', 0, 'COMMA')}]] vnd</p>
+                                    <p>Khởi hành: [[*{toCity.name}]]</p>
+                                    <p>Điểm đến: [[*{fromCity.name}]]</p>
+                                </td>
+                                <td style="width: 15%;">
+                                    <p>Người lớn: [[*{#numbers.formatDecimal(priceAdult, 0, 'POINT', 0, 'COMMA')}]]</p>
+                                    <p>Trẻ em: [[*{#numbers.formatDecimal(priceChildren, 0, 'POINT', 0, 'COMMA')}]]</p>
+                                    <p>Em bé: [[*{#numbers.formatDecimal(priceBaby, 0, 'POINT', 0, 'COMMA')}]]</p>
+                                </td>
+                                <td style="width: 15%;">[[*{toCity.region.name}]]</td>
+                                <td style="width: 13%;">[[*{event.name}]]</td>
+                                <td style="width: 12%;">[[*{#dates.format(createDate, 'dd-MM-yyyy hh:mm:ss')}]]</td>
+                                <td style="width: 10%; text-align: center;">
+                                    <a class="dismissline" th:href="@{|/enterprise/trash_detail_event/*{eventPostId}|}">
+                                        <button class="fas fa-edit huybuttonedit"></button>
+                                    </a>
+                                    <a th:data-restoreEventName="*{name}" th:data-restoreEventId="*{eventPostId}" onclick="showModalKhoiPhucEvent(this.getAttribute('data-restoreEventName'),
+                                    this.getAttribute('data-restoreEventId'))">
+                                        <button class="fas fa-trash-restore huybuttondelete"></button>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="pagination">
+                        <ul>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!---HỘP THOẠI XÁC NHẬN-->
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <p>XÁC NHẬN KHÔI PHỤC</p>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn muốn khôi phục bài viết: </p>
+                    <p>Tên: <b id="restoreEventName"></b></p>
+                    <p>ID: <b id="restoreEventId"></b></p>
+                </div>
+                <div class="modal-footer">
+                    <a id="restoreEventXacNhan">
+                        <button class="modal-button">Khôi phục</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

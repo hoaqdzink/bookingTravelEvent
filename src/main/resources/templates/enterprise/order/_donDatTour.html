@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/enterprise/index :: dynamic(~{::main})}">
+
+<body>
+    <main>
+        <div>
+            <div style="height: 80px;">
+                <form th:action="@{/enterprise/search_order_tour}">
+                    <input name="keyword" class="timkiemadmin" type="text" placeholder="Tìm kiếm">
+                    <button class="timkiemadminbtn" type="submit"><i class="fas fa-search    "></i></button>
+
+                </form>
+
+            </div>
+
+            <div style=" background-color:orange; color: black; padding: 1px 10px; margin-top: 20px;font-family: Tahoma, sans-serif;">
+                <h2>Quản lý đơn dặt</h2>
+            </div>
+
+
+            <div class="table" style=" margin: 0 30px;">
+                <div>
+                    <h2 style="color: gray;font-family: Tahoma, sans-serif;">Danh sach tour</h2>
+                    <hr>
+                </div>
+
+                <div class="mytabs">
+                    <input type="radio" id="tabfree" name="mytabs" checked="checked">
+                    <label for="tabfree">Lịch sử đơn tour</label>
+                    <div class="tab">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Người đặt</th>
+                                    <th>Liên hệ</th>
+                                    <th>Ngày đi</th>
+                                    <th>Ngày đặt</th>
+                                    <th>Tổng tiền </th>
+                                    <th>Trạng thái</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="slideShow1">
+                                <tr th:each="list,state : ${listOrderTourDuyet}" th:object="${list}">
+                                    <td style="width: 5%;">[[${state.count}]]</td>
+                                    <td style="width: 18%;">[[*{account.fullname}]]</td>
+                                    <td style="width: 15%;">[[*{account.phone}]]</td>
+                                    <td style="width: 15%;">[[*{#dates.format(startDate, 'dd-MM-yyyy')}]]</td>
+                                    <td style="width: 10%;">[[*{#dates.format(createDate, 'dd-MM-yyyy hh:mm:ss a')}]]</td>
+                                    <td style="width: 12%;">[[*{#numbers.formatDecimal(sumPrice, 0, 'POINT', 1, 'COMMA')}]]</td>
+                                    <td style="width: 15%; text-align: center;">
+                                        <p class="trangthai" id="test">[[*{status}]]</p>
+                                    </td>
+                                    <td style="width: 10%; text-align: center;">
+                                        <a th:href="@{|/enterprise/order_edit_approve/*{orderTourId}|}">
+                                            <button class="huybtndetail">Xem chi tiết</button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="pagination">
+                            <ul>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <input type="radio" id="tabsilver" name="mytabs">
+                    <label for="tabsilver">Đơn chưa duyệt</label>
+                    <div class="tab">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Người đặt</th>
+                                    <th>Liên hệ</th>
+                                    <th>Ngày đi</th>
+                                    <th>Ngày đặt</th>
+                                    <th>Tổng tiền </th>
+                                    <th>Trạng thái</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="slideShow2">
+                                <tr th:each="list,state : ${listOrderTourWait}" th:object="${list}">
+                                    <td style="width: 5%;">[[${state.count}]]</td>
+                                    <td style="width: 18%;">[[*{account.fullname}]]</td>
+                                    <td style="width: 15%;">[[*{account.phone}]]</td>
+                                    <td style="width: 15%;">[[*{#dates.format(startDate, 'dd-MM-yyyy')}]]</td>
+                                    <td style="width: 10%;">[[*{#dates.format(createDate, 'dd-MM-yyyy hh:mm:ss a')}]]</td>
+                                    <td style="width: 12%;">[[*{#numbers.formatDecimal(sumPrice, 0, 'POINT', 1, 'COMMA')}]]</td>
+                                    <td style="width: 15%; text-align: center;">
+                                        <p class="trangthai" id="test">[[*{status}]]</p>
+                                    </td>
+                                    <td style="width: 10%; text-align: center;">
+                                        <a th:href="@{|/enterprise/order_edit_Wait/*{orderTourId}|}">
+                                            <button class="huybtndetail">Xem chi tiết</button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="pagination2">
+                            <ul>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+
+</html>

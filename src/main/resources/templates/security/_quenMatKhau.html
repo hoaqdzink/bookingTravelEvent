@@ -1,0 +1,11 @@
+<div class="form signupForm" id="forgotpassword">
+    <form class="forgot-pass" th:action="@{/security_forgot_password}" method="post">
+        <h1 style="margin-top: 60px;">Quên mật khẩu</h1>
+        <p style="color: green; text-align: center;">[[${messageForogotSuccess}]]</p>
+        <p style="color: red; text-align: center;">[[${errorSendMailAccount}]]</p>
+        <input name="email" type="email" placeholder="Email khôi phục">
+        <p class="text-danger" th:if="${errorForgotPassword != null}"><i class="fas fa-exclamation-circle"></i>[[${errorForgotPassword}]]</p>
+
+        <button style="cursor: pointer;" class="login-btn-1">Gửi</button>
+    </form>
+</div>

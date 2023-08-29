@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="dynamic(main)">
+
+<head>
+  <title>Booking Travel & Event</title>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="/assets/images/logoBookignTravel.png">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- link Fontawesome -->
+  <link rel="stylesheet" href="/assets/libs/fontawesome-free-5.15.4-web/css/all.min.css">
+  <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+  <script src="https://unpkg.com/boxicons@2.0.9/dist/boxicons.js"></script>
+  <!-- Link thư viện AngularJs -->
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="/assets/libs/angular-1.8.2/angular.min.js"></script>
+
+  <!-- lick css -->
+  <link rel="stylesheet" href="/assets/css/index/header.css">
+  <link rel="stylesheet" href="/assets/css/index/slideShow.css">
+  <link rel="stylesheet" href="/assets/css/index/footer.css">
+  <link rel="stylesheet" href="/assets/css/index/menu2.css">
+  <link rel="stylesheet" href="/assets/css/index/tieubieu.css">
+  <link rel="stylesheet" href="/assets/css/index/article.css">
+
+
+</head>
+
+
+<body ng-app="my-favorite-app" ng-controller="my-favorite-ctrl">
+  <div class="Booking-Travel">
+    <header>
+      <!-- Ngôn ngữ, đăng nhập, thông tin liên hệ -->
+      <div th:replace="/index/menu1.html"></div>
+      <!-- Menu -->
+      <div th:replace="/index/menuChinh.html"></div>
+      <!-- body Header -->
+      <div th:replace="/index/bodyHeader.html"></div>
+
+      <!-- Video -->
+      <video playsinline autoplay muted loop id="video1">
+        <source src="/assets/video/4022711468517831702.mp4" type="video/mp4">
+      </video>
+    </header>
+
+    <!-- Button hỗ trợ -->
+    <div th:replace="/index/menu2.html"></div>
+
+    <!-- Slide show -->
+    <div th:replace="/index/SlideShow.html"></div>
+    <hr style="background-color: black;">
+
+    <article class="container-fluid">
+      <div th:replace="${main}"></div>
+    </article>
+    <div th:replace="/index/footer.html"></div>
+  </div>
+
+
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+  <script src="/assets/js/index/menu.js"></script>
+
+  <!--ẨN HIỆN SLIDE CỦA VÙNG-->
+  <script src="/assets/js/index/anhien.js"></script>
+
+  <!--HÀM HIỆN MỖI KHI CLICK XEM THÊM-->
+  <script src="/assets/js/index/more-tour.js"></script>
+  <script src="/assets/js/detail.js"></script>
+  <!-- <script src="/assets/js/hienhinh.js"></script> -->
+  <script src="/assets/js/my-favorite.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+ 
+ <script>!function(s,u,b,i,z){var o,t,r,y;s[i]||(s._sbzaccid=z,s[i]=function(){s[i].q.push(arguments)},s[i].q=[],s[i]("setAccount",z),r=["widget.subiz.net","storage.googleapis"+(t=".com"),"app.sbz.workers.dev",i+"a"+(o=function(k,t){var n=t<=6?5:o(k,t-1)+o(k,t-3);return k!==t?n:n.toString(32)})(20,20)+t,i+"b"+o(30,30)+t,i+"c"+o(40,40)+t],(y=function(k){var t,n;s._subiz_init_2094850928430||r[k]&&(t=u.createElement(b),n=u.getElementsByTagName(b)[0],t.async=1,t.src="https://"+r[k]+"/sbz/app.js?accid="+z,n.parentNode.insertBefore(t,n),setTimeout(y,2e3,k+1))})(0))}(window,document,"script","subiz", "acretztbxzsgisctnwrt")</script>
+</body>
+
+</html>

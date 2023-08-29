@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/admin/index :: dynamic(~{::main})}">
+
+<body>
+    <main>
+        <form onsubmit="return validateRegisterStaff()" th:action="@{/admin/account_save}" method="post" th:object="${account}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+            <div class="col_line1" style="margin-bottom: 20px;">
+                <label>Tên đăng nhập</label><br>
+                <input id="username" type="text" th:field="*{username}" />
+                <p class="errorMessage" id="errorUsername"></p>
+
+                <br>
+                <label>Họ tên</label><br>
+                <input id="fullname" type="text" th:field="*{fullname}">
+                <p class="errorMessage" id="errorFullname"></p>
+
+                <br>
+                <label>Ngày sinh</label><br>
+                <input id="birthDay" type="date" name="birthDay" th:value="*{birthDay}" />
+                <p class="errorMessage" id="errorBirthDay"></p>
+
+                <br>
+                <label>Email</label><br>
+                <input id="email" type="text" th:field="*{email}" />
+                <p class="errorMessage" id="errorEmail"></p>
+
+                <br>
+                <label>Địa chỉ</label><br>
+                <input id="address" type="text" th:field="*{address}">
+                <p class="errorMessage" id="errorAddress"></p>
+
+                <br>
+                <label>Số điện thoại</label><br>
+                <input id="telephone" type="text" th:field="*{phone}" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');"/>
+                <p class="errorMessage" id="errorTelephone"></p>
+
+                <label>Mật khẩu</label><br>
+                <input id="password" type="password" th:field="*{password}" />
+                <p class="errorMessage" id="errorPassword"></p>
+
+            </div>
+            <div class="col_line1">
+                <label>Ảnh đại diện</label><br>
+                <label>
+                    <img th:src="@{|/assets/images/account/*{folder}/*{image}|}"
+                        onerror="this.src='/assets/icon/Photos-new-icon.png'" class="avatarFile" alt="avarat" id="thumbnailSimple">
+                    <input style="text-indent: -999em;" type="file" name="imageFile" id="imageFile" accept="image/png, image/jpeg, image/jpg">
+                    <input id="imageHINH" type="hidden" th:field="*{image}">
+                </label>
+                <p class="errorMessage" id="errorImage"></p>
+
+                <div style="margin-top: 20px;" class="gioitinh">
+                    <label>Giới tính</label>
+                    <input id="gender" type="radio" th:field="*{gender}" th:value="Nam">Nam
+                    <input id="gender" type="radio" th:field="*{gender}" th:value="Nu">Nữ
+                    <input id="gender" type="radio" th:field="*{gender}" th:value="Khac">Khác
+                    <p class="errorMessage" id="errorGender"></p>
+
+                </div>
+                <div style="margin-top: 20px;" class="quyen">
+                    <label>Quyền</label> <br>
+                    <th:block th:each="r : ${listAllRoles}">
+                        <input id="roles" style="margin-top: 10px;" type="checkbox" th:field="*{roles}" th:value="${r.roleId}" th:text="${r.name}">
+                    </th:block>
+                    <p class="errorMessage" id="errorRoles"></p>
+
+                </div>
+                <br>
+                <button class="button_luu_acc" type="submit">Lưu</button>
+            </div>
+        </form>
+
+    </main>
+</body>
+
+</html>
+<style>
+    .gioitinh>input {
+        width: 25px;
+        height: 0;
+    }
+    
+    .quyen>input {
+        margin-left: 10px;
+    }
+    
+    .col_line1>label>img {
+        border-radius: 50%;
+        height: 100px;
+        width: 100px;
+    }
+    
+    .button_luu_acc {
+        height: 50px;
+        width: 250px;
+        border: 0;
+        background: orange;
+        color: white;
+        position: relative;
+        top: 250px;
+        right: -300px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    
+    .button_luu_acc:hover {
+        opacity: 0.8;
+        box-shadow: 0px 0px 15px #FF5722;
+    }
+</style>

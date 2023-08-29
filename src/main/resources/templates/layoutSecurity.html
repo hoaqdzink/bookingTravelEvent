@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="dynamic(main)">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/assets/images/logoBookignTravel.png">
+    <title>Document</title>
+    <link rel="stylesheet" href="/assets/libs/fontawesome-free-5.15.4-web/css/all.css">
+    <link rel="stylesheet" href="/assets/css/login/index..css">
+    <link rel="stylesheet" href="/assets/css/login/signup.css">
+</head>
+
+<body>
+    <header>
+        <div>
+            <div>
+                <a href="/"><img class="iconhome" src="/assets/icon/bk-removebg-preview2.png" alt=""></a>
+                <a href="https://www.facebook.com/travel.since2021"><i class="fab fa-facebook-square fa-2x icon1"></i></a>
+                <i class="fab fa-twitter fa-2x icon2"></i>
+                <b class="hotline">[[#{mn.one.phone}]]: (+84) 399989849</b>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div th:replace="${main}"></div>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+    
+    <script src="/assets/js/step.js"></script>
+    <!-- <script src="/assets/js/stay.js"></script> -->
+    <script src="/assets/js/security/login.js"></script>
+    <script src="/assets/js/soSanhMatKhau.js"></script>
+    <script src="/assets/js/validate-form.js"></script>
+</body>
+
+
+</html>

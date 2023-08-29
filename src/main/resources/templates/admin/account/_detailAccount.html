@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/admin/index :: dynamic(~{::main})}">
+
+<body>
+    <main>
+        <div style=" background-color:orange; color: black; padding: 1px 10px; margin-top: 20px;font-family: Tahoma, sans-serif;">
+            <h2>Thông tin chi tiết</h2>
+        </div>
+
+        <div class="table" style=" margin: 30px;">
+            <div style="margin-top: 20px;" th:object="${account}">
+                <div class="column_info">
+                    <div class="labelinfo">Tên doanh nghiệp</div>
+                    <div class="labelinfo" th:if="*{taxCode != null}">Mã số thuế</div>
+                    <div class="labelinfo">Ngày tạo</div>
+                    <div class="labelinfo">Tên tài khoản</div>
+                    <div class="labelinfo" th:if="*{nameAdmin != null}">Tên người quản lý</div>
+                    <div class="labelinfo">Số điện thoại</div>
+                    <div class="labelinfo">Email</div>
+                    <div class="labelinfo">Địa chỉ</div>
+                    <div class="labelinfo">Quyền hạn</div>
+                    <div class="labelinfo">Ảnh đại diện</div>
+
+                </div>
+                <div class="column_info" style="width: 40%;">
+                    <div style="margin: 10px;">[[*{fullname}]]</div>
+                    <div style="margin: 10px;" th:if="*{taxCode != null}">[[*{taxCode}]]</div>
+                    <div style="margin: 10px;">[[*{#dates.format(createDate, 'dd/MM/yyyy hh:mm:ss')}]]</div>
+                    <div style="margin: 10px;">[[*{username}]]</div>
+                    <div style="margin: 10px;" th:if="*{nameAdmin!= null}">[[*{nameAdmin}]]</div>
+                    <div style="margin: 10px;">[[*{phone}]]</div>
+                    <div style="margin: 10px;">[[*{email}]]</div>
+                    <div style="margin: 10px;">[[*{address}]]</div>
+
+                    <div style="margin: 10px;">
+                        <th:block th:each="r : ${listAllRoles}">
+                            <input onclick="return false;" type="checkbox" th:field="*{roles}" th:value="${r.roleId}" th:text="${r.name}">
+                        </th:block>
+                    </div>
+                    <div style="margin: 10px;">
+                        <img th:src="@{|/assets/images/account/*{folder}/*{image}|}" onerror="this.src='/assets/icon/Photos-new-icon.png'" class="avatarFile" alt="avarat" id="thumbnailSimple">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

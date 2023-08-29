@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/enterprise/index :: dynamic(~{::main})}">
+
+<body>
+    <main>
+        <div style=" background-color:orange; color: black; padding: 1px 10px; margin-top: 20px;font-family: Tahoma, sans-serif;">
+            <h2>Quản lý đơn đặt</h2>
+        </div>
+        <div class="table" style=" margin: 0 30px;">
+            <div>
+                <h2 style="color: gray;font-family: Tahoma, sans-serif;">Thông tin đơn đặt (Tour)</h2>
+                <hr>
+            </div>
+            <form th:action="@{/enterprise/wait_don_tour}" method="post" th:object="${orderDetail}">
+                <div class="thembai" style=" margin: 20px;">
+                    <button class="trangthai_detail1" name="nutHuy">Hủy đơn</button>
+                    <button class="trangthai_detail2" name="nutDuyet">Duyệt đơn</button>
+                    <div class="col_line4">
+                        <div class="col_line6"><b class="labelinfo">Tên dịch vụ:</b></div>
+                        <div class="col_line5">[[*{tourPost.name}]]</div>
+                    </div>
+                    <div class="col_line4">
+                        <div class="col_line6"><b class="labelinfo">ID:</b></div>
+                        <div class="col_line5">[[*{orderTourId}]]</div>
+                    </div>
+                    <div class="col_line4">
+                        <div class="col_line6"><b class="labelinfo">Tên khách hàng:</b></div>
+                        <div class="col_line5">[[*{account.fullname}]]</div>
+                    </div>
+                    <div class="col_line4">
+                        <div class="col_line6"><b class="labelinfo">Số điện thoại:</b></div>
+                        <div class="col_line5">[[*{account.phone}]]</div>
+                    </div>
+                    <div class="col_line4">
+                        <div class="col_line6"><b class="labelinfo">Ngày đặt:</b></div>
+                        <div class="col_line5">[[*{#dates.format(createDate, 'dd-MM-yyyy hh:mm:ss')}]]</div>
+                    </div>
+                    <div class="col_line4">
+                        <div class="col_line6"><b class="labelinfo">Ngày đi:</b></div>
+                        <div class="col_line5">[[*{#dates.format(startDate, 'dd-MM-yyyy')}]]</div>
+                    </div>
+                    <div class="col_line4">
+                        <div class="col_line6"><b class="labelinfo">Loại vé:</b></div>
+                        <div class="col_line5">-------------------------------------------------------------------------</div>
+                    </div>
+                    <div class="col_line4">
+                        <div class="col_line6"><b style="font-weight: 100; margin-left:10px; color: #6F6F6F;" class="labelinfo">Người lớn:</b></div>
+                        <div class="col_line5">[[*{quantityAdult}]]</div>
+                    </div>
+                    <div class="col_line4">
+                        <div class="col_line6"><b style="font-weight: 100; margin-left:10px; color: #6F6F6F;" class="labelinfo">Trẻ em:</b></div>
+                        <div class="col_line5">[[*{quantityChildren}]]</div>
+                    </div>
+                    <div class="col_line4">
+                        <div class="col_line6"> <b style="font-weight: 100; margin-left:10px; color: #6F6F6F;" class="labelinfo">Em bé:</b></div>
+                        <div class="col_line5">[[*{quantityBaby}]]</div>
+                    </div>
+                    <div class="col_line4">
+                        <div class="col_line6"><b class="labelinfo">Tổng tiền:</b></div>
+                        <div class="col_line5">[[*{#numbers.formatDecimal(sumPrice, 0, 'POINT', 1, 'COMMA')}]]</div>
+                    </div>
+                    <div class="col_line4">
+                        <div class="col_line6"><b class="labelinfo">Ghi chú:</b></div>
+                        <div class="col_line5">
+                            <div class="descriptionNote">[[*{note}]]</div>
+                        </div>
+                    </div>
+
+                    <!------NHỮNG THUỘC TÍNH ẨN-->
+                    <input type="hidden" name="email" th:value="*{account.email}">
+                    <input type="hidden" name="emailEnterprise" th:value="*{tourPost.account.email}">
+                    <input type="hidden" name="fullname" th:value="*{tourPost.account.fullname}">
+                    <input type="hidden" name="orderTourId" th:value="*{orderTourId}">
+                    <input type="hidden" name="username" th:value="*{account.username}">
+                    <input type="hidden" name="startDate" th:value="*{startDate}">
+                    <input type="hidden" name="createDate" th:value="*{createDate}">
+                    <input type="hidden" name="sumPrice" th:value="*{sumPrice}">
+
+                    <input type="hidden" th:field="*{tourPost.tourId}">
+                    <input type="hidden" name="note" th:value="*{note}">
+                    <input type="hidden" name="payment" th:value="*{payment}">
+                    <input type="hidden" name="priceTour" th:value="*{priceTour}">
+                    <input type="hidden" name="priceAdult" th:value="*{priceAdult}">
+                    <input type="hidden" name="priceChildren" th:value="*{priceChildren}">
+                    <input type="hidden" name="priceBaby" th:value="*{priceBaby}">
+                    <input type="hidden" name="quantityAdult" th:value="*{quantityAdult}">
+                    <input type="hidden" name="quantityChildren" th:value="*{quantityChildren}">
+                    <input type="hidden" name="quantityBaby" th:value="*{quantityBaby}">
+                    <input type="hidden" name="discount" th:value="*{discount}">
+            </form>
+            </div>
+    </main>
+</body>
+
+</html>

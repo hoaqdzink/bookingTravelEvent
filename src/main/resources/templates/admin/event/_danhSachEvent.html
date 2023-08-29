@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/admin/index :: dynamic(~{::main})}">
+
+<body>
+    <main>
+        <div>
+            <div style="height: 80px;">
+                <form th:action="@{/admin/search_all_event}">
+                    <input name="keyword" class="timkiemadmin" type="text" placeholder="Tìm kiếm">
+                    <button class="timkiemadminbtn" type="submit"><i class="fas fa-search    "></i></button>
+                </form>
+
+            </div>
+
+            <div style=" background-color:orange; color: black; padding: 1px 10px; margin-top: 20px;font-family: Tahoma, sans-serif;">
+                <h2>Quản lý bài viết </h2>
+            </div>
+
+
+            <div class="table" style=" margin: 0 30px;">
+                <div>
+                    <h2 style="color: gray;font-family: Tahoma, sans-serif;">Danh sách event</h2>
+                    <hr>
+                </div>
+
+                <div class="mytabs">
+                    <input type="radio" id="tabfree" name="mytabs" checked="checked">
+                    <label for="tabfree">Lịch sử bài viết</label>
+                    <div class="tab">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Thông tin chung</th>
+                                    <th>Loại vé</th>
+                                    <th>Vùng</th>
+                                    <th>Danh mục </th>
+                                    <th>Phương tiện</th>
+                                    <th>Ngày tạo </th>
+                                    <th>Trạng thái</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="slideShow1">
+                                <tr th:each="list,state : ${listEventApprove}" th:object="${list}">
+                                    <td style="width: 3%;">[[${state.count}]]</td>
+                                    <td style="width: 25%;">
+                                        <b>[[*{name}]]</b>
+                                        <p>ID: [[*{eventPostId}]]</p>
+                                        <p>Thời gian: [[*{time}]]</p>
+                                        <p>Giá: [[*{#numbers.formatDecimal(priceEvent, 0, 'POINT', 0, 'COMMA')}]] vnd</p>
+                                        <p>Khởi hành: [[*{toCity.name}]]</p>
+                                        <p>Điểm đến: [[*{fromCity.name}]]</p>
+                                    </td>
+                                    <td style="width: 15%;">
+                                        <p>Người lớn: [[*{#numbers.formatDecimal(priceAdult, 0, 'POINT', 0, 'COMMA')}]]</p>
+                                        <p>Trẻ em: [[*{#numbers.formatDecimal(priceChildren, 0, 'POINT', 0, 'COMMA')}]]</p>
+                                        <p>Em bé: [[*{#numbers.formatDecimal(priceBaby, 0, 'POINT', 0, 'COMMA')}]]</p>
+                                    </td>
+                                    <td style="width: 10%;">[[*{toCity.region.name}]]</td>
+                                    <td style="width: 10%;">[[*{event.name}]]</td>
+                                    <td style="width: 10%;">[[*{tranport.name}]]</td>
+                                    <td style="width: 10%;">[[*{#dates.format(createDate, 'dd/MM/yyyy hh:mm:ss')}]]</td>
+                                    <td style="width: 10%; text-align: -webkit-center;">
+                                        <p class="trangthai" id="test">[[*{status}]]</p>
+                                    </td>
+                                    <td style="width: 7%; text-align: center;">
+                                        <a th:href="@{|/admin/detail_event_approve/*{eventPostId}|}">
+                                            <button class="fas fa-info huybuttonedit"></button>
+                                        </a>
+                                    </td>
+                            </tbody>
+                        </table>
+                        <div class="pagination">
+                            <ul>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <input type="radio" id="tabsilver" name="mytabs">
+                    <label for="tabsilver">Bài viết chờ duyệt</label>
+                    <div class="tab">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Thông tin chung</th>
+                                    <th>Loại vé</th>
+                                    <th>Vùng</th>
+                                    <th>Danh mục </th>
+                                    <th>Phương tiện</th>
+                                    <th>Ngày tạo </th>
+                                    <th>Trạng thái</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="slideShow2">
+                                <tr th:each="list,state : ${listEventWait}" th:object="${list}">
+                                    <td style="width: 3%;">[[${state.count}]]</td>
+                                    <td style="width: 25%;">
+                                        <b>[[*{name}]]</b>
+                                        <p>ID: [[*{eventPostId}]]</p>
+                                        <p>Thời gian: [[*{time}]]</p>
+                                        <p>Giá: [[*{#numbers.formatDecimal(priceEvent, 0, 'POINT', 0, 'COMMA')}]] vnd</p>
+                                        <p>Khởi hành: [[*{toCity.name}]]</p>
+                                        <p>Điểm đến: [[*{fromCity.name}]]</p>
+                                    </td>
+                                    <td style="width: 15%;">
+                                        <p>Người lớn: [[*{#numbers.formatDecimal(priceAdult, 0, 'POINT', 0, 'COMMA')}]]</p>
+                                        <p>Trẻ em: [[*{#numbers.formatDecimal(priceChildren, 0, 'POINT', 0, 'COMMA')}]]</p>
+                                        <p>Em bé: [[*{#numbers.formatDecimal(priceBaby, 0, 'POINT', 0, 'COMMA')}]]</p>
+                                    </td>
+                                    <td style="width: 10%;">[[*{toCity.region.name}]]</td>
+                                    <td style="width: 10%;">[[*{event.name}]]</td>
+                                    <td style="width: 10%;">[[*{tranport.name}]]</td>
+                                    <td style="width: 10%;">[[*{#dates.format(createDate, 'dd/MM/yyyy hh:mm:ss')}]]</td>
+                                    <td style="width: 10%; text-align: -webkit-center;">
+                                        <p class="trangthai" id="test">[[*{status}]]</p>
+                                    </td>
+                                    <td style="width: 7%; text-align: center;">
+                                        <a th:href="@{|/admin/detail_event_wait/*{eventPostId}|}">
+                                            <button class="fas fa-info huybuttonedit"></button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="pagination2">
+                            <ul>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+
+</html>

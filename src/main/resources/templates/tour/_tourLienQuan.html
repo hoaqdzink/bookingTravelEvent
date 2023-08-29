@@ -1,0 +1,33 @@
+     <!-- san pham them -->
+     <div class="row" style="margin-top: 50px;">
+
+       <div class="col-md-12">
+         <div style="border-left: 5px solid orange; margin-left: 15px;"></div>
+         <h2 style="color: #FF9922; margin-left: 30px; ">Các tour cùng loại</h2>
+       </div>
+       <div class="col-md-12">
+         <th:block th:each="t : *{type.tourPosts}">
+         <div class="card mb-3" th:if="${t.isDeleted == false AND t.status == 'DUYET'}">
+           <div class="row g-0">
+             <div class="col-4">
+               <a th:href="@{|/tour/detail/${t.tourId}|}">
+                 <img th:src="@{|/assets/images/tour/${t.folder}/${t.primaryImage}|}" class=" img-more"
+                   alt="...">
+               </a>
+
+             </div>
+             <div class="col-md-8">
+               <div class="card-body">
+                 <h5 class="card-title">[[${t.name}]]</h5>
+                 <p class="card-text"><b
+                     style="background-color: aquamarine; border-radius: 15px; margin-right: 10px;">4.5</b>
+                     | 330 đánh giá</p>
+                 <p class="card-text" style="color: white; background-color: #FF9922; width: 25%;  padding: 10px;">
+                   [[${#numbers.formatDecimal(t.priceTour, 0, 'POINT', 0, 'COMMA')}]] vnd</p>
+                </div>
+              </div>
+            </div>        
+          </div>
+        </th:block>
+       </div>
+     </div>

@@ -1,0 +1,69 @@
+<div class="col-5">
+  <div class="vertical-tabs" style="margin-top: 100px;">
+    <ul class="nav nav-tabs1" role="tablist">
+      <li class="nav-item1">
+        <a style="margin-top: 100px;" class="nav-link1 active" data-toggle="tab" href="#pag1" role="tab"
+          aria-controls="home"><i class="fas fa-store"></i></a>
+      </li>
+      <li class="nav-item1">
+        <a class="nav-link1" data-toggle="tab" href="#pag2" role="tab" aria-controls="profile"><i
+            class="fas fa-user"></i></a>
+      </li>
+      <li class="nav-item1">
+        <a class="nav-link1" data-toggle="tab" href="#pag3" role="tab" aria-controls="messages"><i
+            class="fas fa-credit-card"></i></a>
+      </li>
+
+    </ul>
+    <div class="tab-content">
+      <h4 style="text-align: center; color: orange; margin-top: 20px;">{{event.name}}</h4>
+      <div class="tab-pane active" id="pag1" role="tabpanel">
+        <div class="sv-tab-panel">
+          <h5>Phụ thu</h5>
+          <p class="tien">{{event.priceEvent | number}}</p>
+          <h5>Người lớn</h5>
+          <p class="tien">{{event.priceAdult * order.quantityAdult | number}}</p>
+          <h5>Trẻ em</h5>
+          <p class="tien">{{event.priceChildren * order.quantityChildren | number}}</p>
+          <h5>Em bé</h5>
+          <p class="tien">{{event.priceBaby * order.quantityBaby | number}}</p>
+          <h5>Khởi hành</h5>
+          <p class="tien">{{order.startDate | date:'dd/MM/yyyy'}}</p>
+          <h5>Giảm giá</h5>
+          <p class="tien">{{event.discount | number}}%</p>
+          <h1 style="margin-top: 50px;" >Tổng: {{(event.priceEvent + event.priceAdult * order.quantityAdult + event.priceChildren *  order.quantityChildren + event.priceBaby *  order.quantityBaby) - (event.priceEvent + event.priceAdult * order.quantityAdult + event.priceChildren *  order.quantityChildren + event.priceBaby *  order.quantityBaby) * event.discount/100 | number}} đ</h1>
+        </div>
+      </div>
+      <!--  -->
+      <div class="tab-pane" id="pag2" role="tabpanel">
+        <div class="sv-tab-panel">
+          <h5>Thời gian</h5>
+          <p class="tien">{{event.time}}</p>
+
+          <th:block th:object="${userAll}">
+          <h5>Tên khách hàng </h5>
+          <p class="tien">[[*{fullname}]] <a style=" display:none;   font-size: 13px;color: red;" id="username">[(${#request.remoteUser})]</a > </p>
+          <h5>Địa chỉ</h5>
+          <p class="tien">[[*{address}]]</p>
+          <h5>Điện thoại</h5>
+          <p class="tien">[[*{phone}]]</p>
+          <h5>Email</h5>
+          <p class="tien">[[*{email}]]</p>
+        </th:block>
+        <h1 style="margin-top: 50px;" >Tổng: {{(event.priceEvent + event.priceAdult * order.quantityAdult + event.priceChildren *  order.quantityChildren + event.priceBaby *  order.quantityBaby) - (event.priceEvent + event.priceAdult * order.quantityAdult + event.priceChildren *  order.quantityChildren + event.priceBaby *  order.quantityBaby) * event.discount/100 | number}} đ</h1>
+        </div>
+      </div>
+      <div class="tab-pane" id="pag3" role="tabpanel">
+        <div class="sv-tab-panel">
+          <h5>Mã Event</h5>
+          <p class="tien">{{event.eventPostId}}</p>
+          <h5>Thanh toán</h5>
+          <p class="tien">{{order.payment}}</p>
+          <h5>Nhà cung cấp</h5>
+          <p class="tien">{{event.account.fullname}}</p>
+          <h1 style="margin-top: 50px;" >Tổng: {{(event.priceEvent + event.priceAdult * order.quantityAdult + event.priceChildren *  order.quantityChildren + event.priceBaby *  order.quantityBaby) - (event.priceEvent + event.priceAdult * order.quantityAdult + event.priceChildren *  order.quantityChildren + event.priceBaby *  order.quantityBaby) * event.discount/100 | number}} đ</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

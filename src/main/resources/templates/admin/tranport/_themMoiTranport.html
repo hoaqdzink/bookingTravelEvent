@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/admin/index :: dynamic(~{::main})}">
+
+<body>
+    <main>
+        <form name="formTranport" onsubmit="return validateTranport()" th:action="@{/admin/save_tranport}" method="post" th:object="${tranport}">
+            <label>Phương tiện</label>
+            <br>
+            <input type="hidden" th:field="*{tranportId}">
+            <input name="name" th:value="*{name}" type="text">
+            <p class="errorMessage" id="errorTranport"></p>
+            <br>
+            <button type="submit">Lưu</button>
+        </form>
+        <script>
+            function validateTranport(){
+                var status = false;
+                var index = 0;
+                var name = document.forms["formTranport"]["name"];
+                var errorTranport = document.getElementById("errorTranport");
+                if(name.value == ""){
+                    text = `<i class="fas fa-exclamation-circle"></i>Vui lòng nhập vào tên phương tiện`;
+                    errorTranport.innerHTML = text;
+                    name.focus();
+                }else{
+                    errorTranport.innerHTML = '';
+                    index++;
+                }
+
+                if(index == 1){
+                    status = true;
+                }else{
+                    status = false;
+                }
+                return status;
+            }
+        </script>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layoutSecurity :: dynamic(~{::main})}">
+
+<body>
+    <main>
+        <form name="formForgotPassword" onsubmit="return validateFormForgot()" th:action="@{/reset_password}" method="post">
+            <div class="formBx" style="left: 30%; width: 40%;">
+                <div class="form signinForm">
+                    <input type="hidden" name="token" th:value="${token}">
+                    <h1 style="margin-top: 60px;">Thay đổi mật khẩu</h1>
+                    <p id="errorToken" style="text-align: center; color: red; margin-bottom: 8px;">[[${errorToken}]]</p>
+                    <input name="newPassword" type="password" placeholder="Mật khẩu mới">
+                    <p style="font-size: 13px;" class="text-danger" id="errorForgotPassword"></p>
+                    <input name="confirmPassword" id="password" type="password" placeholder="Nhập lại mật khẩu">
+                    <p style="font-size: 13px;"  class="text-danger" id="errorForgotConfirmPassword"></p>
+                    <button style="cursor: pointer;" type="submit" class="login-btn-1">Xác nhận </button>
+                </div>
+            </div>
+        </form>
+        <script>
+            function validateFormForgot(){
+                var index = 0;
+                var status = false;
+
+                var password = document.forms["formForgotPassword"]["newPassword"].value;
+                var confirmPassword = document.forms["formForgotPassword"]["confirmPassword"].value;
+
+                var errorPassword = document.getElementById("errorForgotPassword");
+                var errorConfirmPassword = document.getElementById("errorForgotConfirmPassword");
+                var errorToken = document.getElementById("errorToken");
+
+                if(password == ""){
+                    text = `<i class="fas fa-exclamation-circle"></i> Vui lòng nhập vào mật khẩu mới`;
+                    errorPassword.innerHTML = text;
+                    errorToken.innerHTML = '';
+                }else{
+                    errorPassword.innerHTML = '';
+                    index++;
+                }
+
+                if(password != confirmPassword){
+                    text = `<i class="fas fa-exclamation-circle"></i> Nhập lại mật khẩu không chính xác`;
+                    errorConfirmPassword.innerHTML = text;
+
+                }else if(confirmPassword == ""){
+                    text = `<i class="fas fa-exclamation-circle"></i>Vui lòng nhập vào xác nhận mật khẩu`;
+                    errorConfirmPassword.innerHTML = text;
+                }
+                else{
+                    errorConfirmPassword.innerHTML = '';
+                    index++;
+                }
+
+                if(index == 2){
+                    status = true;
+                }else{
+                    status = false;
+                }
+                return status;
+            }
+        </script>
+    </main>
+</body>
+
+</html>

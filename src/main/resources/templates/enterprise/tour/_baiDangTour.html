@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/enterprise/index :: dynamic(~{::main})}">
+
+<body>
+    <main>
+        <div onload="Test()">
+            <div style="height: 80px;">
+                <form th:action="@{/enterprise/search_tour_post}">
+                    <input class="timkiemadmin" type="text" name="keyword" placeholder="Tìm kiếm">
+                    <button class="timkiemadminbtn" type="submit"><i class="fas fa-search    "></i></button>
+
+                </form>
+                <a th:href="@{/enterprise/tour_form}"><button class="buttonadmin_themmoi" > Thêm mới</button></a>
+            </div>
+
+            <div style=" background-color:orange; color: black; padding: 1px 10px; margin-top: 20px;font-family: Tahoma, sans-serif;">
+                <h2>Quản lý đăng bài</h2>
+            </div>
+
+
+            <div class="table" style=" margin: 0 30px;">
+                <div>
+                    <h2 style="color: gray;font-family: Tahoma, sans-serif;">Danh sách tour</h2>
+                    <hr>
+                </div>
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Thông tin chung</th>
+                                <th>Loại vé</th>
+                                <th>Vùng</th>
+                                <th>Danh mục </th>
+                                <th>Phương tiện</th>
+                                <th>Ngày tạo </th>
+                                <th>Trạng thái</th>
+                                <th>Chỉnh sửa</th>
+                            </tr>
+                        </thead>
+                        <tbody id="slideShow1">
+                            <tr th:each="list,state : ${listTour}" th:object="${list}">
+                                <td style="width: 3%;">[[${state.count}]]</td>
+                                <td style="width: 22%;">
+                                    <b>[[*{name}]]</b>
+                                    <p>ID: [[*{tourId}]]</p>
+                                    <p>Thời gian: [[*{time}]]</p>
+                                    <p>Giá: [[*{#numbers.formatDecimal(priceTour, 0, 'POINT', 0, 'COMMA')}]] vnd</p>
+                                    <p>Khởi hành: [[*{fromCity.name}]]</p>
+                                    <p>Điểm đến: [[*{toCity.name}]]</p>
+                                </td>
+                                <td style="width: 15%;">
+                                    <p>Người lớn: [[*{#numbers.formatDecimal(priceAdult, 0, 'POINT', 0, 'COMMA')}]]</p>
+                                    <p>Trẻ em: [[*{#numbers.formatDecimal(priceChildren, 0, 'POINT', 0, 'COMMA')}]]</p>
+                                    <p>Em bé: [[*{#numbers.formatDecimal(priceBaby, 0, 'POINT', 0, 'COMMA')}]]</p>
+                                </td>
+                                <td style="width: 10%;">[[*{toCity.region.name}]]</td>
+                                <td style="width: 10%;">[[*{type.mainName}]]</td>
+                                <td style="width: 10%;">[[*{tranport.name}]]</td>
+                                <td style="width: 10%;">[[*{#dates.format(createDate, 'dd-MM-yyyy hh:mm:ss a')}]]</td>
+                                <td style="width: 10%; text-align: -webkit-center;">
+                                    <p class="trangthai" id="test">[[*{status}]]</p>
+                                </td>
+                                <td style="width: 10%; text-align: center;">
+                                    <a class="dismissline" th:href="@{|/enterprise/tour_edit/*{tourId}|}">
+                                        <button class="fas fa-edit huybuttonedit"></button>
+                                    </a>
+                                    <a class="dismissline" th:data-name="*{name}" th:data-id="*{tourId}" onclick="hienModalTour(this.getAttribute('data-name'), this.getAttribute('data-id'))">
+                                        <button class="fas fa-trash-alt huybuttondelete"></button>
+                                    </a>
+
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="pagination">
+                        <ul>
+
+                        </ul>
+                    </div>
+                    <!---HỘP THOẠI XÁC NHẬN-->
+                    <div id="myModal" class="modal">
+
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <span class="close">&times;</span>
+                                <p>XÁC NHẬN XÓA</p>
+                            </div>
+                            <div class="modal-body">
+                                <p>Bạn có chắc muốn xóa bài đăng</p>
+                                <p>Tên: <b id="nameTour"></b></p>
+                                <p>ID: <b id="idTour"></b></p>
+                            </div>
+                            <div class="modal-footer">
+                                <a id="xacNhan1">
+                                    <button class="modal-button">Xóa</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

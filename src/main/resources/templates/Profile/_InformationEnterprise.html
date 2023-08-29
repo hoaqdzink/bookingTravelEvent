@@ -1,0 +1,179 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout :: dynamic(~{::main})}">
+
+<body>
+  <main>
+    <div th:replace="/Profile/menu_Profile"></div>
+    <div class="container-fluid" style="background-color: #F0F6F9">
+      <br>
+      <div class="nhapTT">
+        <h3 class="text10">Thông tin cá nhân</h3>
+        <a style="margin-left: 50px">Hồ sơ và thông tin của bạn</a>
+        <div class="gach"></div>
+        <form name="formProfileEnte" onsubmit="return validateFormProfileEnte()" th:action="@{/profile/save_profile}" th:object="${user}" method="post" class="form-tt" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+          <input type="hidden" th:field="*{username}">
+          <input type="hidden" th:field="*{password}">
+          <div class="row">
+            <div class="col-8" style="margin-top: 30px;">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label>Tên doanh nghiệp <span style="color: red;">*</span></label>
+                  <input name="fullname" th:value="*{fullname}" type="text" class="form-control input11"
+                    placeholder="Nhập tên doanh nghiệp">
+                    <p id="errorEnteFullname" class="text-danger"></p>
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Mã số thuế <span style="color: red;">*</span></label>
+                  <input name="taxCode" th:value="*{taxCode}" type="text" class="form-control input11" placeholder="Nhập mã số thuế" onkeypress="return event.charCode != 32">
+                  <p id="errorEnteTaxCode" class="text-danger"></p>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label>Tên người quản lý <span style="color: red;">*</span></label>
+                  <input name="nameAdmin" th:value="*{nameAdmin}" type="text" class="form-control input11"
+                    placeholder="Nhập tên người quản lý">
+                    <p id="errorEnteNameAdmin" class="text-danger"></p>
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Số điện thoại <span style="color: red;">*</span></label>
+                  <input name="phone" th:value="*{phone}" type="number" class="form-control input11"
+                    placeholder="Nhập số điện thoại" onkeypress="return event.charCode != 32">
+                    <p id="errorEntePhone" class="text-danger"></p>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label>Email <span style="color: red;">*</span></label>
+                  <input name="email" th:value="*{email}" type="text" class="form-control input11" placeholder="Nhập Email" onkeypress="return event.charCode != 32">
+                  <p id="errorEnteEmail" class="text-danger"></p>
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Địa chỉ <span style="color: red;">*</span></label>
+                  <input name="address" th:value="*{address}" type="text" class="form-control input11" placeholder="Nhập địa chỉ">
+                  <p id="errorEnteAddress" class="text-danger"></p>
+                </div>
+              </div>
+
+
+            </div>
+            <div class="col-4 anhFile1">
+              <label class="form-row1">
+                <img th:src="@{|/assets/images/account/*{folder}/*{image}|}"
+                  onerror="this.src='/assets/images/userImage.png'" class="avatarFile" alt="avarat"
+                  id="thumbnailSimple">
+                <div class="chonFile">
+                  <input style="text-indent: -999em;" type="file" name="imageFile" id="imageFile" accept="image/jpg, image/jpeg, image/png">
+                  <input type="hidden" th:field="*{image}">
+                </div>
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <button class="btn saveInf">Lưu</button>
+          </div>
+        </form>
+      </div>
+      <br>
+    </div>
+    <script>
+      function validateFormProfileEnte(){
+        var status = false;
+        var index = 0;
+
+        var fullname = document.forms["formProfileEnte"]["fullname"].value;
+        var taxCode = document.forms["formProfileEnte"]["taxCode"].value;
+        var nameAdmin = document.forms["formProfileEnte"]["nameAdmin"].value;
+        var phone = document.forms["formProfileEnte"]["phone"].value;
+        var email = document.forms["formProfileEnte"]["email"].value;
+        var address = document.forms["formProfileEnte"]["address"].value;
+
+        var errorEnteFullname = document.getElementById("errorEnteFullname");
+        var errorEnteTaxCode = document.getElementById("errorEnteTaxCode");
+        var errorEnteNameAdmin= document.getElementById("errorEnteNameAdmin");
+        var errorEntePhone = document.getElementById("errorEntePhone");
+        var errorEnteEmail = document.getElementById("errorEnteEmail");
+        var errorEnteAddress = document.getElementById("errorEnteAddress");
+        
+        var mailformat = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+        if(fullname == ""){
+          text = `<i class="fas fa-exclamation-circle"></i>Vui lòng điền vào tên doanh nghiệp`;
+          errorEnteFullname.innerHTML = text;
+        }else{
+          errorEnteFullname.innerHTML = '';
+          index++;
+        }
+
+        if(taxCode == ""){
+          text = `<i class="fas fa-exclamation-circle"></i>Vui lòng điền vào mã số thuế`;
+          errorEnteTaxCode.innerHTML = text;
+        }else if(taxCode.length != 10){
+          text = `<i class="fas fa-exclamation-circle"></i>Mã số thuế phải đủ 10 số`;
+          errorEnteTaxCode.innerHTML = text;
+        }
+        else{
+          errorEnteTaxCode.innerHTML = '';
+          index++;
+        }
+
+        if(nameAdmin == ""){
+          text = `<i class="fas fa-exclamation-circle"></i>Vui lòng điền vào người quản lý`;
+          errorEnteNameAdmin.innerHTML = text;
+        }else{
+          errorEnteNameAdmin.innerHTML = '';
+          index++;
+        }
+
+        if(phone == ""){
+          text = `<i class="fas fa-exclamation-circle"></i>Vui lòng điền vào số điện thoại`;
+          errorEntePhone.innerHTML = text;
+        }else if(phone.length < 10 || phone.length >11){
+          text = `<i class="fas fa-exclamation-circle"></i>Số điện thoải phải 10 hoặc 11 số`;
+          errorEntePhone.innerHTML = text;
+        }
+        else{
+          errorEntePhone.innerHTML = '';
+          index++;
+        }
+
+        if(email == ""){
+          text = `<i class="fas fa-exclamation-circle"></i>Vui lòng điền vào email`;
+          errorEnteEmail.innerHTML = text;
+        }else if(!email.match(mailformat)){
+          text = `<i class="fas fa-exclamation-circle"></i>Email chưa đúng định dạng`;
+          errorEnteEmail.innerHTML = text;
+        }
+        else{
+          errorEnteEmail.innerHTML = '';
+          index++;
+        }
+
+        if(address == ""){
+          text = `<i class="fas fa-exclamation-circle"></i>Vui lòng điền vào địa chỉ`;
+          errorEnteAddress.innerHTML = text;
+        }else{
+          errorEnteAddress.innerHTML = '';
+          index++;
+        }
+
+        if(index == 6){
+          status = true;
+        }else{
+          status = false;
+        }
+
+        return status;
+      }
+    </script>
+  </main>
+</body>
+
+</html>
+<style>
+  ::-webkit-datetime-edit-text{
+      color: orange;
+  }
+</style>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/index :: dynamic(~{::main})}">
+
+<body>
+    <main>
+        <div class="row">
+            <!-- Chương trình tiêu biểu -->
+            <div th:replace="/index/tieuBieu.html"></div>
+            <!-- Những địa điểm nghĩ dưỡng độc đáo -->
+            <div th:replace="/index/docDao.html"></div>
+            <!-- Chưng trình khuyên mãi hấp dẫn -->
+            <div th:replace="/index/khuyenMai.html"></div>
+            <!-- Du lịch tours tiêu biêu trong nước -->
+            <div th:replace="/index/Dulich.html"></div>
+            <!-- Tours du lịch nước ngoài -->
+            <div th:replace="/index/tuorNuocNgoai.html"></div>
+            <!-- Team Building -->
+            <div th:replace="/index/teamBuilding.html"></div>
+        </div>
+        <!-- Meeting Event -->
+        <div th:replace="/index/meetingEvent.html"></div>
+        <!-- Nhà hàng - trung tâm -->
+        <div th:replace="/index/nhaHang.html"></div>
+        <!-- Các event phổ biến -->
+        <div th:replace="/index/Events.html"></div>
+        
+    </main>
+</body>
+
+</html>

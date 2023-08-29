@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/admin/index :: dynamic(~{::main})}">
+
+<body>
+    <main>
+        <div>
+            <div style="height: 80px;">
+                <a th:href="@{/admin/form_type_event}"><button class="buttonadmin_themmoi"> Thêm mới</button></a>
+            </div>
+            <div style=" background-color:orange; color: black; padding: 1px 10px; margin-top: 20px;font-family: Tahoma, sans-serif;">
+                <h2>Quản lý loại event</h2>
+            </div>
+
+
+            <div class="table" style=" margin: 0 30px;">
+                <div>
+                    <h2 style="color: gray;">Danh sách loại event</h2>
+                    <hr>
+                </div>
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Tến loại event</th>
+                                <th>Chỉnh sửa</th>
+                            </tr>
+                        </thead>
+                        <tbody id="slideShow1">
+                            <tr th:each="list, state : ${typeEventList}" th:object="${list}">
+                                <td>[[${state.count}]]</td>
+                                <td>[[*{name}]]</td>
+                                <td style="text-align: center;">
+                                    <a class="dismissline" th:href="@{|/admin/edit_type_event/*{eventId}|}">
+                                        <button class="fas fa-edit huybuttonedit"></button>
+                                    </a>
+                                    <a><button class="fas fa-recycle huybuttondelete "></button></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="pagination">
+                        <ul>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

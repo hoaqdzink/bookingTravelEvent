@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="dynamic(main)">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/assets/images/logoBookignTravel.png">
+    <link rel="stylesheet" href="/assets/libs/fontawesome-free-5.15.4-web/css/all.css">
+    <link rel="stylesheet" href="/assets/css/enterprise/admin.css">
+    <link rel="stylesheet" href="/assets/css/enterprise/site.css">
+    <link rel="stylesheet" href="/assets/css/enterprise/richtext.min.css">
+    <link rel="stylesheet" href="/assets/css/enterprise/table.css">
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="/assets/libs/angular-1.8.2/angular.min.js"></script>
+    <title>ADMIN</title>
+</head>
+
+<body onload="Test()">
+    <div class="sidebar ">
+        <div class="logo-details">
+            <a class="logo_name2" th:href="@{/}">
+                <img src="/assets/icon/bk-removebg-preview.png" alt="">
+            </a>
+            <a class="logo_name" th:href="@{/}">
+                <img src="/assets/images/logoweb-removebg-preview.png" alt="">
+            </a>
+            <!-- <span class="logo_name">Xin chao ban!</span> -->
+        </div>
+        <ul class="nav-links">
+            <li>
+                <div class="profile-details" th:object="${userAll}">
+                    <div class="profile-content">
+                        <img th:src="@{|/assets/images/account/*{folder}/*{image}|}" onerror="this.src='/assets/images/logoBKing2.png'" alt="profile">
+                    </div>
+
+                    <div class="name-job">
+                        <div class="profile_name">[[*{username}]]</div>
+                        <div class="job">[[*{fullname}]]</div>
+                    </div>
+                    <!-- <i class="fas fa-sign-out-alt    "></i> -->
+                </div>
+            </li>
+            <li>
+                <div class="icon-link">
+                    <a href="#">
+                        <i class="fas fa-clipboard-list"></i>
+                        <span class="link_name">Quả lý bài viết</span>
+                    </a>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Quả lý bài viết</a></li>
+                    <li><a th:href="@{/admin/list_tour}">Quản lý tour</a></li>
+                    <li><a th:href="@{/admin/list_event}">Quản lý event</a></li>
+                </ul>
+            </li>
+
+            <li th:if="${#request.isUserInRole('DIRE')}">
+                <div class="icon-link">
+                    <a th:href="@{/admin/account_list}">
+                        <i class="fas fa-users"></i>
+                        <span class="link_name">Quản lý tài khoản</span>
+                    </a>
+
+                </div>
+                <ul class="sub-menu" th:href="@{/admin/account_list}">
+                    <li><a class="link_name">Quản lý tài khoản</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="icon-link">
+                    <a href="#">
+                        <i class="fas fa-chart-area"></i>
+                        <span class="link_name">Thông kê</span>
+                    </a>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Thông kê</a></li>
+                    <li><a th:href="@{/admin/report}">Thống kê số lượng</a></li>
+                    <li><a th:href="@{/admin/reportTop}">Top doanh nghiệp</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="icon-link">
+                    <a href="#">
+                        <i class="fas fa-shopping-cart"></i>
+
+                        <span class="link_name">Các loại dịch vụ</span>
+                    </a>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Loại tour</a></li>
+                    <li><a th:href="@{/admin/list_to_city}">Điểm đến</a></li>
+                    <li><a th:href="@{/admin/list_tranport}">Phương tiện</a></li>
+                    <li><a th:href="@{/admin/list_type}">Loại tour</a></li>
+                    <li><a th:href="@{/admin/list_type_event}">Loại event</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="icon-link">
+                    <a href="#">
+                        <i class="fas fa-trash"></i>
+                        <span class="link_name">Thùng rác</span>
+                    </a>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Thông kê</a></li>
+                    <li><a th:href="@{/admin/list_account_trash}">Tài khoản</a></li>
+                </ul>
+            </li>
+
+        </ul>
+        <div class="sign-out-div" style="position: absolute; bottom: 10px;">
+            <a class="sign-out-icon" th:href="@{/security/logoff}" id="text1">
+                <i style="margin-right: 25px;" class="fas fa-sign-out-alt"></i>
+            </a>
+            <a class="sign-out" th:href="@{/security/logoff}" id="text1">
+                <i style="margin-right: 25px;" class="fas fa-sign-out-alt"></i>
+                <span>Đăng xuất</span>
+            </a>
+        </div>
+    </div>
+    <section class="home-section">
+        <div class="home-content">
+            <i class="fas fa-bars"></i>
+            <span style="font-family: Tahoma, sans-serif;" class="text"> Trang chủ</span>
+
+        </div>
+    </section>
+    <hr>
+    <!-- PHẦN HIỂN THỊ THÔNG TIN -->
+    <section style="background-color: white;" class="home-section">
+        <div th:replace="${main}"></div>
+    </section>
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/assets/js/enterprise/table.js"></script>
+    <script src="/assets/js/enterprise/adminstatus.js"></script>
+    <script src="/assets/js/enterprise/admin.js"></script>
+    <script type="text/javascript" src="/assets/js/showImage.js"></script>
+    <script src="/assets/js/popupdelete.js"></script>
+    <script src="/assets/js/validate-form.js"></script>
+    <!-- GỌI TOOL VĂN BẢN LÊN -->
+    <script>
+        $(document).ready(function() {
+            $('.mota').richText();
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/enterprise/index :: dynamic(~{::main})}">
+
+<body>
+    <main>
+
+        <div style=" background-color:orange; color: black; padding: 1px 10px; margin-top: 20px; font-family: Tahoma, sans-serif;">
+            <h2>Quản lý bài đăng</h2>
+        </div>
+        <!---->
+        <form onsubmit="return validateFormTourPost()" ng-app="city-app" ng-controller="city-ctrl" th:action="@{/enterprise/save_tourPost}" method="post" th:object="${tour}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+            <div class="thembai" style=" margin: 0 30px;">
+                <input type="hidden" th:field="*{tourId}">
+                <div class="col_line1" style="margin-top: 30px;">
+                    <label>Tên Tour <span class="dauSao">*</span></label><br>
+                    <input id="name" th:field="*{name}" type="text" placeholder="Tên tour bạn muốn thêm" autofocus>
+                    <p class="errorMessage" id="errorName"></p>
+
+                    <div class="col_line2" style="margin-right: 0; margin-top: 20px;">
+                        <label for="abc">Người lớn <span class="dauSao">*</span>(18 tuổi trở lên)</label><br>
+                        <input id="priceAdult" name="priceAdult" th:value="*{#numbers.formatDecimal(priceAdult,0,0)}" type="text" placeholder="giá người lớn" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                        <p class="errorMessage" id="errorPriceAdult"></p>
+                    </div>
+                    <div class="col_line2" style="margin-top: 20px;">
+                        <label for="abc">Giá <span class="dauSao">*</span></label><br>
+                        <input id="priceTour" name="priceTour" th:value="*{#numbers.formatDecimal(priceTour,0,0)}" type="text" placeholder="giá Tour" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                        <p class="errorMessage" id="errorPriceTour"></p>
+
+                    </div>
+
+                    <div class="col_line2" style="margin-right: 0; margin-top: 30px;">
+                        <label for="abc">Em bé <span class="dauSao">*</span>(dưới 6 tuổi)</label><br>
+                        <input id="priceBaby" name="priceBaby" th:value="*{#numbers.formatDecimal(priceBaby,0,0)}" type="text" placeholder="500.000 đ" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                        <p class="errorMessage" id="errorPriceBaby"></p>
+
+                    </div>
+                    <div class="col_line2" style="margin-top: 30px;">
+                        <label for="abc">Trẻ em <span class="dauSao">*</span>(6 - 17 tuổi)</label><br>
+                        <input id="priceChildren" name="priceChildren" th:value="*{#numbers.formatDecimal(priceChildren,0,0)}" type="text" placeholder="1.000.000 đ" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                        <p class="errorMessage" id="errorPriceChildren"></p>
+
+                    </div>
+                    <div class="col_line4" style="margin-top: 30px; margin-left: 0;">
+                        <label for="abc">Khuyến mãi</label><br>
+                        <input th:field="*{discount}" type="text" maxlength="3" onkeypress="return isNumberKey(event)" placeholder="% khuyến mãi" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                    </div>
+                </div>
+                <div class="col_line1">
+                    <div class="col_line2" style="margin-right: 0;">
+                        <label for="abc">Khởi hành <span class="dauSao">*</span></label><br>
+                        <select style="cursor: pointer;" id="fromCity" th:field="*{fromCity.fromCityId}">
+                            <option value="0">----Chọn điểm khởi hành----</option>
+                            <option th:each="from : ${fromCityList}" th:value="${from.fromCityId}" th:text="${from.name}"></option>
+                        </select>
+                        <p class="errorMessage" id="errorFromCity"></p>
+                    </div>
+                    <div class="col_line2">
+                        <label for="abc">Chọn vùng <span class="dauSao">*</span></label><br>
+                        <select style="cursor: pointer;" id="region" th:field="*{toCity.region.regionId}" onchange="angular.element(this).scope().loadCity(this.value)">
+                            <option value="0">----Chọn vùng----</option>
+                            <option th:each="region : ${regionList}" th:value="${region.regionId}" th:text="${region.name}"></option>
+                        </select>
+                        <p class="errorMessage" id="errorRegion"></p>
+                    </div>
+                </div>
+
+                <div class="col_line1">
+                    <div class="col_line2" style="margin-right: 0;">
+                        <label for="abc">Loại tour <span class="dauSao">*</span></label><br>
+                        <select style="cursor: pointer;" id="typeTour" th:field="*{type.typeId}">
+                            <option value="0">----Chọn loại tour----</option>
+                            <option th:each="type : ${typeList}" th:value="${type.typeId}" th:text="${type.mainName}">
+                            </option>
+                        </select>
+                        <p class="errorMessage" id="errorType"></p>
+                    </div>
+
+
+                    <div class="col_line2">
+                        <label for="abc">Điểm đến <span class="dauSao">*</span></label><br>
+                        <select style="cursor: pointer;" id="toCity" name="toCity.toCityId" ng-model="toCityId">
+                            <option value="">----Chọn điểm đến theo vùng----</option>
+                            <option ng-repeat="ct in cities" ng-value="ct.toCityId">{{ct.name}}</option>
+                        </select>
+                        <p class="errorMessage" id="errorToCity"></p>
+                    </div>
+                </div>
+
+
+                <div class="col_line1">
+                    <div class="col_line2" style="margin-right: 0;">
+                        <label for="abc">Phương tiện <span class="dauSao">*</span></label><br>
+                        <select style="cursor: pointer;" id="tranport" th:field="*{tranport.tranportId}">
+                            <option value="0">----Chọn phương tiện----</option>
+                            <option th:each="tranport : ${tranportList}" th:value="${tranport.tranportId}"
+                                th:text="${tranport.name}"></option>
+                        </select>
+                        <p class="errorMessage" id="errorTranport"></p>
+                    </div>
+                    <div class="col_line2">
+                        <label for="abc">Thời gian <span class="dauSao">*</span></label><br>
+                        <input id="time" th:field="*{time}" type="text" placeholder="2 ngày 3 đêm">
+                        <p class="errorMessage" id="errorTime"></p>
+                    </div>
+
+                </div>
+
+
+
+                <div class="col_line4">
+                    <div class="page-wrapper box-content">
+                        <label for="">Mô tả dịch vụ <span class="dauSao">*</span></label>
+                        <textarea id="moTaTour" style="font-family: monospace;" th:field="*{descriptionTour}" class="mota"></textarea>
+                    </div>
+
+                    <p class="errorMessage" id="errorDescriptionTour"></p>
+
+                </div>
+
+                <div class="col_line1" style="width: 50%;">
+                    <div class="uphinh">
+                        <label for="">Ảnh bìa <span class="dauSao">*</span></label><br>
+
+                        <label>
+                            <input style=" text-indent: -999em; width: 0; height: 0;" class="hide" type="file"
+                                name="mainImage" id="mainImage" accept="image/png, image/jpeg, image/jpg">
+                            <input id="hinhCHINH" type="hidden" th:field="*{primaryImage}">
+                            <img style="width: 550px; height: 260px;" id="thumbnailMainImage"
+                                th:src="@{|/assets/images/tour/*{folder}/*{primaryImage}|}"
+                                onerror="this.src='/assets/images/noImage.png'">
+                        </label>
+                        <p class="errorMessage" id="errorPrimaryImage"></p>
+
+                    </div>
+                </div>
+                <div class="col_line1" style="width: 50%;">
+
+                    <label style="margin-left: 50%;">Ảnh phụ <span class="dauSao">*</span></label><br>
+                    <label>
+                        <input class="extraImage" type="file" name="extraImage" accept="image/png, image/jpeg, image/jpg" />
+                        <input class="hinhPHU" type="hidden" th:field="*{extraImage1}" />
+                        <img class="extraImage2" id="thumbnailExtraImage0"
+                            th:src="@{|/assets/images/tour/*{folder}/*{extraImage1}|}"
+                            onerror="this.src='/assets/images/noImage2.png'" alt="hình ảnh tour" />
+                    </label>
+
+                    <label>
+                        <input class="extraImage" type="file" name="extraImage" accept="image/png, image/jpeg, image/jpg" />
+                        <input class="hinhPHU" type="hidden" th:field="*{extraImage2}" />
+                        <img class="extraImage2" id="thumbnailExtraImage1"
+                            th:src="@{|/assets/images/tour/*{folder}/*{extraImage2}|}"
+                            onerror="this.src='/assets/images/noImage2.png'" alt="hình ảnh tour" />
+                    </label>
+
+                    <label>
+                        <input class="extraImage" type="file" name="extraImage" accept="image/png, image/jpeg, image/jpg" />
+                        <input class="hinhPHU" type="hidden" th:field="*{extraImage3}" />
+                        <img class="extraImage2" id="thumbnailExtraImage2"
+                            th:src="@{|/assets/images/tour/*{folder}/*{extraImage3}|}"
+                            onerror="this.src='/assets/images/noImage2.png'" alt="hình ảnh tour" />
+                    </label>
+
+                    <label>
+                        <input class="extraImage" type="file" name="extraImage" accept="image/png, image/jpeg, image/jpg" />
+                        <input class="hinhPHU" type="hidden" th:field="*{extraImage4}" />
+                        <img class="extraImage2" id="thumbnailExtraImage3"
+                            th:src="@{|/assets/images/tour/*{folder}/*{extraImage4}|}"
+                            onerror="this.src='/assets/images/noImage2.png'" alt="hình ảnh tour" />
+                    </label>
+
+                    <label>
+                        <input class="extraImage" type="file" name="extraImage" accept="image/png, image/jpeg, image/jpg" />
+                        <input class="hinhPHU" type="hidden" th:field="*{extraImage5}" />
+                        <img class="extraImage2" id="thumbnailExtraImage4"
+                            th:src="@{|/assets/images/tour/*{folder}/*{extraImage5}|}"
+                            onerror="this.src='/assets/images/noImage2.png'" alt="hình ảnh tour" />
+                    </label>
+
+                    <label>
+                        <input class="extraImage" type="file" name="extraImage" accept="image/png, image/jpeg, image/jpg" />
+                        <input class="hinhPHU" type="hidden" th:field="*{extraImage6}" />
+                        <img class="extraImage2" id="thumbnailExtraImage5"
+                            th:src="@{|/assets/images/tour/*{folder}/*{extraImage6}|}"
+                            onerror="this.src='/assets/images/noImage2.png'" alt="hình ảnh tour" />
+                    </label>
+                </div>
+                <div class="col_line4">
+
+                    <h5>1. Độ dài ảnh bìa khi hiển thị là 928x419 px</h5>
+                    <h5>2. Bên dưới ảnh bìa là 5 ảnh phụ</h5>
+                    <h5>3. Dưới ảnh phụ là phần mô tả dịch vụ</h5>
+                    <h5>4. Lưu ý phần <span class="dauSao">*</span> màu đỏ là không được bỏ trống</h5>
+
+                </div>
+                <div class="col_line4">
+                    <b>Bạn có muốn đẩy bài lên đầu trang không ?</b><br>
+                    <h5>(Việc này sẻ tốn thêm phụ phí vui lòng xem trong điều khoảng)</h5>
+                    <div class="col_line4" style="width: 5%; height: 0;">Có
+                        <input style="width: 0; height: 10px;" type="radio" class="daybai" id="true" name="topPost" th:field="*{topPost}" th:value="true">
+                    </div>
+                    <div class="col_line4" style="width: 10%; height: 0;">Không
+                        <input style="width: 0; height: 10px;" checked type="radio" class="daybai" id="false" name="topPost" th:field="*{topPost}" th:value="false">
+                    </div>
+
+
+                </div>
+                <div class="button_action">
+                    <a th:href="@{/enterprise/tour_form}" class="datlai_button ">Đặt lại</a>
+                    <button th:if="*{tourId == null}" type="submit" class="them" style="background-color: green;">Thêm mới</button>
+                    <button th:if="*{tourId != null}" type="submit" class="capnhat" style="background-color: blue;">Cập nhật</button>
+                </div>
+            </div>
+        </form>
+        <script src="/assets/js/enterprise/city.js"></script>
+    </main>
+</body>
+
+</html>
+<style>
+    .extraImage {
+        text-indent: -999em;
+        width: 0px;
+        height: 0px;
+        cursor: pointer;
+    }
+    
+    .extraImage2 {
+        width: 130px;
+        height: 130px;
+        background-size: 100% 100%;
+        cursor: pointer;
+    }
+</style>

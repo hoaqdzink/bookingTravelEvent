@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="DD-DD">
+        <h2 style="margin-left: 15px;">Những địa điểm nghĩ dưỡng độc đáo</h2>
+        <p style="margin-left: 15px;">Nơi các cập tình nhân trãi nghiệm cảm giác mới lạ</p>
+
+        <div class="row col">
+            <div class="col-3 card-docDao" th:each="t : ${types}">
+                <a th:href="@{|/tour/list?tid=${t.typeId}|}">
+                    <div class="Rosona">
+                        <h3 th:text="${t.mainName}"></h3>
+                        <p th:text="${t.extraName}"></p>
+                    </div>
+                    <img th:src="@{|/assets/images/index/Tieubieu/${t.logo}|}" style="width: 250px; height: 370px;"
+                        alt="Rosona">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

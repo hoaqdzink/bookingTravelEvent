@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/admin/index :: dynamic(~{::main})}">
+
+<body>
+    <main>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+        <div>
+            <div style="height: 80px;">
+                <form th:action="@{/admin/account_search}">
+                    <input name="keyword" class="timkiemadmin" type="text" placeholder="Tìm kiếm">
+                    <button class="timkiemadminbtn" type="submit"><i class="fas fa-search    "></i></button>
+                </form>
+                <a th:href="@{/admin/account_form}"><button class="buttonadmin_themmoi" > Thêm nhân viên</button></a>
+            </div>
+
+            <div style=" background-color:orange; color: black; padding: 1px 10px; margin-top: 20px;font-family: Tahoma, sans-serif;">
+                <h2>Quản lý tài khoản </h2>
+            </div>
+
+
+            <div class="table" style=" margin: 30px;">
+
+                <div class="mytabs">
+                    <input type="radio" id="tabfree" name="mytabs" checked="checked">
+                    <label for="tabfree">Tài khoản khách hàng</label>
+                    <div class="tab">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th><a th:href="@{|/admin/account_list?sortField=username&sortDir=${reverseSortDir}|}">Tên tài khoản</a></th>
+                                    <th>Người sở hữu/ công ty</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Quyền hạn </th>
+                                    <th>Kích hoạt</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="slideShow1">
+                                <tr th:each="list,state : ${listPartner}" th:object="${list}">
+                                    <td style="width: 3%;">[[${state.count}]]</td>
+                                    <td style="width: 20%;">[[*{username}]]</td>
+                                    <td style="width: 22%;">[[*{fullname}]]</td>
+                                    <td style="width: 16%;">[[*{#dates.format(createDate, 'dd/MM/yyyy hh:mm:ss a')}]]</td>
+                                    <td style="width: 20%;">[[*{roles}]]</td>
+                                    <td style="width: 9%;" id="trangThaiActive">[[*{enabled}]]</td>
+                                    <td style="width: 10%; text-align: center;">
+                                        <a th:href="@{|/admin/account_detail/*{username}|}">
+                                            <button class="huybtndetail">Xem chi tiết</button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="pagination">
+                            <ul>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <input type="radio" id="tabsilver" name="mytabs">
+                    <label for="tabsilver">Tài khoản nhân viên</label>
+                    <div class="tab">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th><a th:href="@{|/admin/account_list?sortField=username&sortDir=${reverseSortDir}|}">Tên tài khoản</a></th>
+                                    <th>Người sở hữu</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Quyền hạn </th>
+                                    <th>Kích hoạt</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="slideShow2">
+                                <tr th:each="list, state : ${listAdmin}" th:object="${list}">
+                                    <td style="width: 3%;">[[${state.count}]]</td>
+                                    <td style="width: 20%;">[[*{username}]]</td>
+                                    <td style="width: 22%;">[[*{fullname}]]</td>
+                                    <td style="width: 16%;">[[*{#dates.format(createDate, 'dd/MM/yyyy hh:mm:ss a')}]]</td>
+                                    <td style="width: 20%;">[[*{roles}]]</td>
+                                    <td style="width: 9%;" id="trangThaiActive">[[*{enabled}]]</td>
+                                    <td style="width: 10%; text-align: center;">
+                                        <a class="dismissline" th:href="@{|/admin/account_edit/*{username}|}">
+                                            <button class="fas fa-edit huybuttonedit"></button>
+                                        </a>
+
+                                        <a th:data-name="*{fullname}" th:data-username="*{username}" onclick="hienModalAccount(this.getAttribute('data-name'), this.getAttribute('data-username'))">
+                                            <button class="fas fa-trash-alt huybuttondelete"></button>
+                                        </a>
+
+
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="pagination2">
+                            <ul>
+
+                            </ul>
+                        </div>
+                        <!---HỘP THOẠI XÁC NHẬN-->
+                        <div id="myModal" class="modal">
+
+                            <!-- Modal content -->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <span class="close">&times;</span>
+                                    <p>XÁC NHẬN XÓA</p>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Bạn có chắc muốn xóa tài khoản</p>
+                                    <p>Tên: <b id="nameUsername"></b></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <a id="xacNhan3">
+                                        <button class="modal-button">Xóa</button>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

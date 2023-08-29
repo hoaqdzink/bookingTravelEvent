@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/index :: dynamic(~{::main})}">
+
+<body>
+    <main>
+        <div class="row">
+            <div class="TieuBieu container-fluid">
+                <!-- Bộ lọc -->
+                <div class="row">
+                    <div class="col-9">
+                        <!-- Example button -->
+                        <div class="btn-group">
+                            <h5 style="margin-top: auto; margin-bottom: auto;">Sắp xếp theo:</h5>
+                            <!-- Vùng -->
+                            <div>
+                                <button type="button" class="btn ml-4  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Vùng
+                                </button>
+                                <div class="dropdown-menu" style="background-color: white;">
+                                    <a th:href="@{/tour/list}" class="dropdown-item">Tất cả các Vùng</a>
+                                    <th:block th:each="r : ${regions}">
+                                        <a th:href="@{|/tour/list?rid=${r.regionId}|}" class="dropdown-item">[[${r.name}]]</a>
+                                    </th:block>
+                                </div>
+                            </div>
+
+                            <!-- Phươn tiện -->
+                            <div>
+                                <button type="button" class="btn  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Phương tiện
+                                </button>
+                                <div class="dropdown-menu" style="background-color: white;">
+                                    <a th:href="@{/tour/list}" class="dropdown-item">Tất cả các phương tiện</a>
+                                    <th:block th:each="tr : ${tranports}">
+                                        <a th:href="@{|/tour/list?trid=${tr.tranportId}|}" class="dropdown-item">[[${tr.name}]]</a>
+                                    </th:block>
+
+                                </div>
+                            </div>
+
+                            <!-- Loại -->
+                            <div>
+                                <button type="button" class="btn  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Loại
+                                </button>
+                                <div class="dropdown-menu" style="background-color: white;">
+                                    <a th:href="@{/tour/list}" class="dropdown-item" href="">Tất cả các loại</a>
+                                    <th:block th:each="t : ${types}">
+                                        <a th:href="@{|/tour/list?tid=${t.typeId}|}" class="dropdown-item">[[${t.mainName}]]</a>
+                                    </th:block>
+                                </div>
+                            </div>
+
+                            <div>
+                                <form th:action="@{/filter/between_price}">
+                                    <input name="priceMin" type="number" class="ml-4 mr-3" placeholder="Giá thấp nhất"> -
+                                    <input id="priceMax" name="priceMax" type="number" class="ml-3" placeholder="Giá cao nhất">
+                                    <button class="btn-primary btn ml-2"> Tìm </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="    margin-left: auto; display: block;">
+                            Bộ lọc <i class="fas fa-filter" style="color: orange;"></i>
+                        </button>
+                        <div class="dropdown-menu" style="background-color: white;">
+                            <a th:href="@{/filter/price/high}" class="dropdown-item">Giá từ cao đến thấp</a>
+                            <a th:href="@{/filter/price/low}" class="dropdown-item">Giá từ thấp đến cao</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- tiêu đe -->
+                <h2 style="text-align: center; margin-top: 30px; margin-bottom: 30px;">Các chương trình đã chọn</h2>
+                <!-- card -->
+                <div class="row tourP" id="vaoMore">
+                    <div class="mt-4 col-3 typical-tour float-left" id="moreShow" th:each="t : ${listAllTour}">
+                        <div class="card text-left">
+                            <div>
+                                <p class="typeTB">
+                                    <a>[[${t.type.mainName}]]</a>
+                                </p>
+                                <p class="location">
+                                    <i class="fas fa-map-marker-alt" style="color: orange;  margin-left: 20px;">
+                                        <a style="color: white; margin: 10px 20px 10px 5px; font-family: Tahoma, Geneva;">[[${t.toCity.name}]]</a>
+                                    </i>
+                                </p>
+                                <a th:href="@{|/tour/detail/${t.tourId}|}">
+                                    <img class="card-img-top" style="height: 250px;" th:src="@{|/assets/images/tour/${t.folder}/${t.primaryImage}|}">
+                                </a>
+                            </div>
+
+                            <h6 class="card-title" style="height: 50px;">
+                                <p class="ten-bai-viet">[[${t.name}]]</p>
+                            </h6>
+                            <div class="card-body">
+                                <div>
+                                    <p class="card-text m-1">
+                                        <i class="fas fa-clock"></i> [[${t.time}]]
+                                        <input class="tymCheck float-right mt-3" id="nutTym" type="checkbox" 
+                                        th:attr="ng-click=@{|favorite.addTour(${t.tourId.substring(4)})|}, ng-checked=@{|favorite.checkTour(${t.tourId.substring(4)})|}"/>
+                                    </p>
+                                    <p class="card-text m-1">
+                                        <i class="fas fa-location-arrow"></i> Nơi khởi hành: [[${t.fromCity.name}]]
+                                    </p>
+                                    <p class="card-text m-1">
+                                        <i class="fas fa-car-alt"></i> Phương tiện: [[${t.tranport.name}]]
+                                    </p>
+                                    <span th:if="${t.discount != 0}" class="sale">-[[${#numbers.formatDecimal(t.discount, 0, 'POINT', 0, 'COMMA')}]]%</span>
+                                </div>
+                            </div>
+                            <div class="container">
+                                <span style="right: 15px;margin-top: -25px;position: absolute;font-size: 16px;"> Giá cũ 
+                                    <span style="font-weight: bold; text-decoration: line-through;">[[${#numbers.formatDecimal(t.priceTour, 0, 'POINT', 0, 'COMMA')}]]</span>
+                                </span>
+                                <i class="fas fa-star" style="color: orange; background-color: rgb(240, 240, 240);">5</i>
+
+                                <a style="color: rgb(180, 180, 180);"> | đánh giá</a>
+                                <a class="float-right" style="color: white; background-color: orange; margin-left: 48px; font-size: 18px; padding: 5px 10px; border-radius: 2px;">[[*{#numbers.formatDecimal(t.sumPriceTourDiscount, 0, 'POINT', 0, 'COMMA')}]]
+                                    vnđ</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row" style="margin-left: auto; margin-right: auto; display: block; margin-top: 50px;">
+                <button class="buttonSeeAdd" id="showMore">Xem thêm</button>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
